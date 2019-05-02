@@ -76,6 +76,22 @@ import 'package:f_logs/utils/timestamp/timestamp_format.dart';
 
 How to use
 ------------
+Log files are exported on storage directory so it's very important to add these permissions to your project's manifest file first.
+
+**Android**
+```
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+```
+**iOS**
+```
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>FLogs would like to save photos from the app to your gallery</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>FLogs would like to access your photo gallery for uploading images to the app</string>
+```
+
+To save logs, simply call any of the method mentioned below:
 
 **1. Simple Info Log**
 
