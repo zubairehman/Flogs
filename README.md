@@ -142,5 +142,5 @@ How to use
 Wiki
 --------
 
-Checkout [wiki](https://github.com/user/repo/blob/branch/other_file.md) for more info
+Checkout [wiki](https://github.com/zubairehman/Flogs/wiki) for more info
 
