@@ -4,7 +4,6 @@ import 'package:f_logs/model/flog/log.dart';
 import 'package:sembast/sembast.dart';
 
 class FlogDao {
-
   // A Store with int keys and Map<String, dynamic> values.
   // This Store acts like a persistent map, values of which are Flogs objects converted to Map
   final _flogsStore = intMapStoreFactory.store(DBConstants.FLOG_STORE_NAME);
@@ -58,20 +57,21 @@ class FlogDao {
       List<String> logLevels,
       int startTimeInMillis,
       int endTimeInMillis}) async {
-
     //creating list of filters
     List<Filter> filters = List();
     List<Filter> timestampFilters = List();
 
     //check to see if dataLogsType is not null
     if (dataLogsType != null && dataLogsType.length > 0) {
-      Filter dataLogTypeFilter = Filter.inList(DBConstants.FIELD_DATA_LOG_TYPE, dataLogsType);
+      Filter dataLogTypeFilter =
+          Filter.inList(DBConstants.FIELD_DATA_LOG_TYPE, dataLogsType);
       filters.add(dataLogTypeFilter);
     }
 
     //check to see if logLevels is not null
     if (logLevels != null && logLevels.length > 0) {
-      Filter logLevelsFilter = Filter.inList(DBConstants.FIELD_LOG_LEVEL, logLevels);
+      Filter logLevelsFilter =
+          Filter.inList(DBConstants.FIELD_LOG_LEVEL, logLevels);
       filters.add(logLevelsFilter);
     }
 
@@ -87,20 +87,22 @@ class FlogDao {
 
     //check to see if user provided start time
     if (startTimeInMillis != null) {
-      Filter startTimeFilter =
-          Filter.greaterThan(DBConstants.FIELD_TIME_IN_MILLIS, startTimeInMillis);
+      Filter startTimeFilter = Filter.greaterThan(
+          DBConstants.FIELD_TIME_IN_MILLIS, startTimeInMillis);
       filters.add(startTimeFilter);
     }
 
     //check to see if user provided end time
     if (endTimeInMillis != null) {
-      Filter endTimeFilter = Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS, endTimeInMillis);
+      Filter endTimeFilter =
+          Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS, endTimeInMillis);
       filters.add(endTimeFilter);
     }
 
     //creating finder
     final finder = Finder(
-        filter: Filter.and(filters), sortOrders: [SortOrder(DBConstants.FIELD_DATA_LOG_TYPE)]);
+        filter: Filter.and(filters),
+        sortOrders: [SortOrder(DBConstants.FIELD_DATA_LOG_TYPE)]);
 
     final recordSnapshots = await _flogsStore.find(
       await _db,
@@ -116,12 +118,11 @@ class FlogDao {
     }).toList();
   }
 
-  Future<List<Log>> getAllSortedByFilter(
-      {List<Filter> filters}) async {
-
+  Future<List<Log>> getAllSortedByFilter({List<Filter> filters}) async {
     //creating finder
     final finder = Finder(
-        filter: Filter.and(filters), sortOrders: [SortOrder(DBConstants.FIELD_DATA_LOG_TYPE)]);
+        filter: Filter.and(filters),
+        sortOrders: [SortOrder(DBConstants.FIELD_DATA_LOG_TYPE)]);
 
     final recordSnapshots = await _flogsStore.find(
       await _db,
@@ -136,7 +137,6 @@ class FlogDao {
       return log;
     }).toList();
   }
-
 
   Future<List<Log>> getAllLogs() async {
     final recordSnapshots = await _flogsStore.find(

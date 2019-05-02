@@ -1,7 +1,7 @@
 name: f_logs
 description: FLog provides quick &amp; simple logging solution. All logs are saved to the DB which can then be exported in files.
-version: 0.0.1
-author: Ioteck Solutions Team <zubairehman.work@gmail.com>
+version: 0.0.2
+author: Zubair Rehman <zubairehman.work@gmail.com>
 homepage: https://github.com/zubairehman/Flogs
 
 environment:
@@ -21,6 +21,11 @@ dependencies:
 
   # A new flutter plugin for getting and requesting permission on Android.
   permission_handler: ^3.0.1
+
+  meta: ^1.1.6
+  path: ^1.6.2
+
+
 
 dev_dependencies:
   flutter_test:

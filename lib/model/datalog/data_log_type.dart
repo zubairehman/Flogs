@@ -1,4 +1,12 @@
-enum DataLogType { DEFAULT, DEVICE, LOCATION, NOTIFICATION, NETWORK, DATABASE, ERRORS }
+enum DataLogType {
+  DEFAULT,
+  DEVICE,
+  LOCATION,
+  NOTIFICATION,
+  NETWORK,
+  DATABASE,
+  ERRORS
+}
 
 class DataLogTypeConverter {
   static String fromEnumToString(DataLogType type) {

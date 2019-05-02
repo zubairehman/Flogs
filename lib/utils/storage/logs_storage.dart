@@ -4,7 +4,6 @@ import 'package:f_logs/constants/constants.dart';
 import 'package:path_provider/path_provider.dart';
 
 class LogsStorage {
-
   static final LogsStorage _singleton = LogsStorage._();
 
   // Singleton accessor
@@ -18,7 +17,7 @@ class LogsStorage {
   Future<String> get _localPath async {
     var directory;
 
-    if(Platform.isIOS) {
+    if (Platform.isIOS) {
       directory = await getApplicationDocumentsDirectory();
     } else {
       directory = await getExternalStorageDirectory();
@@ -32,7 +31,7 @@ class LogsStorage {
 
     //creating directory
     Directory(path).create()
-    // The created directory is returned as a Future.
+        // The created directory is returned as a Future.
         .then((Directory directory) {
       print(directory.path);
     });
@@ -53,7 +52,6 @@ class LogsStorage {
 
   Future<String> readLogsToFile() async {
     try {
-
       final file = await _localFile;
 
       // Read the file

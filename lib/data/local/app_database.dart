@@ -7,7 +7,6 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
 class AppDatabase {
-
   // Singleton instance
   static final AppDatabase _singleton = AppDatabase._();
 

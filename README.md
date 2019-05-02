@@ -34,32 +34,63 @@ _______________________________________________
 **1. Simple Info Log**
 
 ```dart
-    PLog.logThis(TAG, "method_name", "Log: " + Math.random(), LogLevel.INFO);
+    FLog.logThis(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log",
+      type: LogLevel.INFO);
 ```
 
 **2. Simple Warning Log**
 
 ```dart
-    PLog.logThis(TAG, "method_name", "This is a warning message!", LogLevel.WARNING);
+    FLog.logThis(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log",
+      type: LogLevel.WARNING);
 ```
 
 **3. Error Log**
 
 ```dart
-    PLog.logThis(TAG, "method_name", "This is a error message!", LogLevel.ERROR);
+    FLog.logThis(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log",
+      type: LogLevel.ERROR);
 ```
 
 **4. Severe Log**
 
 ```dart
-    PLog.logThis(TAG, "method_name", "This is a severe error message!", LogLevel.SEVERE);
+    FLog.logThis(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log",
+      type: LogLevel.SEVERE);
 ```
 
 **5. Exception Log**
 
 ```dart
-    PLog.logThis(TAG, "method_name", "This is a error message!", LogLevel.ERROR, exception: Exception("This is an Exception!"));
-    PLog.logThis(TAG, "reportError", Exception("This is an Exception!"));
+    FLog.logThis(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log",
+      type: LogLevel.SEVERE, 
+      exception: Exception("This is an Exception!"));
+```
+
+**6. Data Log**
+
+```dart
+    FLog.logThis(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log",
+      type: LogLevel.SEVERE,
+      dataLogType: DataLogType.DEVICE.toString());
 ```
 
 Wiki
@@ -67,7 +98,3 @@ Wiki
 
 Will be available soon
 
-Kotlin Version
---------
-
-Checkout the kotlin version: [Kotlin Version](https://github.com/umair13adil/RxLogs)

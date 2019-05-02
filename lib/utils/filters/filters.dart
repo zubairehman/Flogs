@@ -9,7 +9,6 @@ class Filters {
       List<String> logLevels,
       int startTimeInMillis,
       int endTimeInMillis}) {
-
     //creating list of filters
     List<Filter> filters = List();
     List<Filter> timestampFilters = List();
