@@ -7,7 +7,7 @@ Overview
 
 All logs are saved to files in storage path provided. These logs are helpful when developer wants to analyze user activities within the app. A new log file is created every hour on a user event. These logs can be filtered and sorted easily. Logs can easily be exported as zip file base on filter type. This zip file can be uploaded to server on export. FLogs also provide functionality to log arrange data logs into a predefined directory structure. These logs can be used for a specific event within the app.
 
-![banner](https://github.com/zubairehman/SEMBAST-Example/blob/master/screenshots/sembast-block.png)
+![banner](https://github.com/zubairehman/Flogs/blob/master/images/flogs-banner.png)
 
 
 Features
