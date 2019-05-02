@@ -28,8 +28,8 @@ Features
 15. Exports HTML formatted exceptions
 
                 
-#### To Log data to file simply call like this
-_______________________________________________
+How to use
+----------
 
 **1. Simple Info Log**
 
