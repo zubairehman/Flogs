@@ -142,5 +142,5 @@ How to use
 Wiki
 --------
 
-Will be available soon
+Checkout [wiki](https://github.com/user/repo/blob/branch/other_file.md) for more info
 
