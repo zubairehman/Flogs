@@ -1,14 +1,13 @@
 # FLogs Advance Logging Framework
 
+![banner](https://github.com/zubairehman/Flogs/blob/master/images/flogs-banner.png)
+
 FLog is an Advanced Logging Framework develop in flutter that provides quick & simple logging solution. All logs are saved to the DB which can then be exported as a zip file.
 
 Overview
 --------
 
 All logs are saved to files in storage path provided. These logs are helpful when developer wants to analyze user activities within the app. A new log file is created every hour on a user event. These logs can be filtered and sorted easily. Logs can easily be exported as zip file base on filter type. This zip file can be uploaded to server on export. FLogs also provide functionality to log arrange data logs into a predefined directory structure. These logs can be used for a specific event within the app.
-
-![banner](https://github.com/zubairehman/Flogs/blob/master/images/flogs-banner.png)
-
 
 Features
 --------
