@@ -28,8 +28,52 @@ Features
 15. Exports HTML formatted exceptions
 
                 
-How to use
-----------
+Use this package as a library
+-----------------------------
+
+##1. Depend on it
+
+Add this to your package's pubspec.yaml file:
+
+```
+dependencies:
+  f_logs: ^0.0.2
+```
+
+##2. Install it
+
+You can install packages from the command line:
+
+with Flutter
+
+```
+$ flutter packages get
+
+```
+
+Alternatively, your editor might support flutter packages get. Check the docs for your editor to learn more.
+
+##3. Import it
+
+Now in your Dart code, you can use:
+
+```
+import 'package:f_logs/constants/constants.dart';
+import 'package:f_logs/constants/db_constants.dart';
+import 'package:f_logs/data/local/app_database.dart';
+import 'package:f_logs/data/local/flog_dao.dart';
+import 'package:f_logs/model/datalog/data_log_type.dart';
+import 'package:f_logs/model/flog/flog.dart';
+import 'package:f_logs/model/flog/flog_config.dart';
+import 'package:f_logs/model/flog/log.dart';
+import 'package:f_logs/model/flog/log_level.dart';
+import 'package:f_logs/utils/filters/filters.dart';
+import 'package:f_logs/utils/formatter/formate_type.dart';
+import 'package:f_logs/utils/formatter/formatter.dart';
+import 'package:f_logs/utils/storage/logs_storage.dart';
+import 'package:f_logs/utils/timestamp/timestamp_format.dart';
+```
+
 
 **1. Simple Info Log**
 
