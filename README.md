@@ -73,6 +73,8 @@ import 'package:f_logs/utils/storage/logs_storage.dart';
 import 'package:f_logs/utils/timestamp/timestamp_format.dart';
 ```
 
+How to use
+------------
 
 **1. Simple Info Log**
 
