@@ -6,7 +6,13 @@
 
 * Done code formatting
 
-## [0.0.2] - May 02, 2019
+## [0.0.3] - May 02, 2019
 
 * Updated readme.md file
+* Added wiki
+
+## [0.0.4] - May 03, 2019
+
+* Updated readme.md file
+* Added wiki
 
