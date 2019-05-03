@@ -77,7 +77,8 @@ import 'package:f_logs/utils/timestamp/timestamp_format.dart';
 ```
 
 How to use
-------------
+----------
+
 Log files are exported on storage directory so it's very important to add these permissions to your project's manifest file first.
 
 **Android**
@@ -157,8 +158,74 @@ To save logs, simply call any of the method mentioned below:
       dataLogType: DataLogType.DEVICE.toString());
 ```
 
+Available Methods
+-----------------
+FLogs provide many convinience methods to save logs into or to fetch them from database, below is the list of all the methods available:
+
+**1. logThis**
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or if you want to log data. The difference between FLog and DataLogs is described above, you can also check out wiki for more details.
+```dart
+    static logThis({
+    @required String className,
+    @required String methodName,
+    @required String text,
+    @required LogLevel type,
+    Exception exception,
+    String dataLogType,
+  }){}
+```
+
+**2. printLogs**
+Fetches all the logs from database and prints them as a string using StringBuffer()
+```
+static printLogs() async {}
+```
+
+**3. getAllLogsByCustomFilter**
+Accepts list of filters as an arguments and returnes list of logs based on the provided filters. The use of Filters with their usage is explaned in wiki, please checkout wiki for more details.
+```
+  List<Filter> filters = [Filter.greaterThan('[FieldName]', '[Value]')]
+  
+  static Future<List<Log>> getAllLogsByCustomFilter(
+      {List<Filter> filters}) async {}
+```
+
+**4. getAllLogsByFilter**
+A convinience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (milisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched). In-order to have full control over filters, use method provided above.
+```
+  static Future<List<Log>> getAllLogsByFilter(
+      {List<String> dataLogsType,
+      List<String> logLevels,
+      int startTimeInMillis,
+      int endTimeInMillis}) async {}
+```
+
+**5. getAllLogs**
+Fetches all the logs from database and returns a list of logs.
+```
+ static Future<List<Log>> getAllLogs() async {}
+```
+
+**6. exportLogs**
+Exports logs to external storage under FLog directory.
+```
+  static exportLogs() async {}
+```
+
+**7. clearLogs**
+Clears all the logs stored in database.
+```
+static clearLogs() {}
+```
+
+**8. applyConfigurations**
+Apply user provided configuraions to FLogs.
+```
+static applyConfigurations(LogsConfig config) {}
+```
+
 Wiki
---------
+----
 
 Checkout [wiki](https://github.com/zubairehman/Flogs/wiki) for more info
 
