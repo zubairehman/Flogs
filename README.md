@@ -160,7 +160,7 @@ To save logs, simply call any of the method mentioned below:
 
 Available Methods
 -----------------
-FLogs provide many convinience methods to save logs into or to fetch them from database, below is the list of all the methods available:
+FLogs provide many convenience methods to save logs into or to fetch them from database, below is the list of all the methods available:
 
 **1. logThis**
 
@@ -186,7 +186,7 @@ static printLogs() async {}
 
 **3. getAllLogsByCustomFilter**
 
-Accepts list of filters as an arguments and returnes list of logs based on the provided filters. The use of Filters with their usage is explaned in wiki, please checkout wiki for more details.
+Accepts list of filters as an arguments and returns list of logs based on the provided filters. The use of Filters with their usage is explaned in wiki, please checkout wiki for more details.
 ```
 List<Filter> filters = [Filter.greaterThan('[FieldName]', '[Value]')]
 
@@ -196,7 +196,7 @@ static Future<List<Log>> getAllLogsByCustomFilter(
 
 **4. getAllLogsByFilter**
 
-A convinience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (milisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched). In-order to have full control over filters, use method provided above.
+A convenience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (milisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched). In-order to have full control over filters, use method provided above.
 ```
 static Future<List<Log>> getAllLogsByFilter(
     {List<String> dataLogsType,
@@ -228,7 +228,7 @@ static clearLogs() {}
 
 **8. applyConfigurations**
 
-Apply user provided configuraions to FLogs.
+Apply user provided configurations to FLogs.
 ```
 static applyConfigurations(LogsConfig config) {}
 ```
