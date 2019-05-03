@@ -85,5 +85,4 @@ class FlogDao {
       return log;
     }).toList();
   }
-
 }

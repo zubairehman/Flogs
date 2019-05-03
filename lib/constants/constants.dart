@@ -11,7 +11,6 @@ class Constants {
   static const EXCEPTION_NULL_KEY =
       'Encrryption key is not provided, please provide encryption key in LogsConfig';
 
-
   // Print Messages
   static const PRINT_EXPORT_MSG =
       '\n--------------------------------------------------------------------------------------------\nExporting Logs: This might take a while depending upon the size\n--------------------------------------------------------------------------------------------';
