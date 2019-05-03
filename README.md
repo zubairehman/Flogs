@@ -7,7 +7,9 @@ FLog is an Advanced Logging Framework develop in flutter that provides quick & s
 Overview
 --------
 
-All logs are saved to files in storage path provided. These logs are helpful when developer wants to analyze user activities within the app. A new log file is created every hour on a user event. These logs can be filtered and sorted easily. Logs can easily be exported as zip file base on filter type. This zip file can be uploaded to server on export. FLogs also provide functionality to log arrange data logs into a predefined directory structure. These logs can be used for a specific event within the app.
+FLogs is written in dart. It basically features two types of loggers (FLog & DataLog) with many of advanced features needed for logging. Logs are saved in database which can then be exported in document directory of Android|iOS device. The logs are helpful when developer wants to analyze user activities within the app. These logs can be filtered and sorted easily. Logs can easily be exported as zip file base on filter type, the zip file can then be uploaded to server or to use it locally. 
+
+Many times we want to log set of data to analyze certain activity e.g. Location (GPS Coordinates), Device info, Network requests etc. this helps us to quickly identify and fix the issue that is hard to debug when the app is in production. FLogs provide such functionality to log data set into database. These logs can then be fetched by applying different convinience filters availale.
 
 Features
 --------
