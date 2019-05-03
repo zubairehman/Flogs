@@ -166,14 +166,14 @@ FLogs provide many convinience methods to save logs into or to fetch them from d
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or if you want to log data. The difference between FLog and DataLogs is described above, you can also check out wiki for more details.
 
 ```dart
-    static logThis({
+static logThis({
     @required String className,
     @required String methodName,
     @required String text,
     @required LogLevel type,
     Exception exception,
     String dataLogType,
-  }){}
+}){}
 ```
 
 **2. printLogs**
