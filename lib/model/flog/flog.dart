@@ -3,10 +3,10 @@ import 'package:f_logs/data/local/flog_dao.dart';
 import 'package:f_logs/model/flog/flog_config.dart';
 import 'package:f_logs/model/flog/log.dart';
 import 'package:f_logs/model/flog/log_level.dart';
+import 'package:f_logs/utils/datetime/date_time.dart';
 import 'package:f_logs/utils/filters/filters.dart';
 import 'package:f_logs/utils/formatter/formatter.dart';
 import 'package:f_logs/utils/storage/logs_storage.dart';
-import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sembast/sembast.dart';
 
@@ -58,11 +58,6 @@ class FLog {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't d anything
     if (_isLogsConfigValid()) {
-      //current time stamp
-      DateTime now = DateTime.now();
-      String timestamp =
-          DateFormat(_config.timestampFormat.toString()).format(now);
-
       //creating log object
       Log log = Log(
         className: className,
@@ -71,10 +66,11 @@ class FLog {
         logLevel: type,
         dataLogType: dataLogType,
         exception: exception.toString(),
-        timestamp: timestamp,
-//        timeInMillis: 1556132400000,
-        timeInMillis: now.millisecondsSinceEpoch,
+        timestamp: DateTimeUtils.getCurrentTimestamp(_config),
+        timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
       );
+
+//      print(DateTimeUtils.getTimeInMillis(_config));
 
       //writing it to DB
       _writeLogs(log);
@@ -226,6 +222,22 @@ class FLog {
   /// This will apply user provided configurations to FLogs
   static applyConfigurations(LogsConfig config) {
     _config = config;
+
+    //check to see if encryption is enabled
+    if (_config.encryptionEnabled) {
+      //check to see if encryption key is provided
+      if (_config.encryptionKey.isEmpty) {
+        throw new Exception(Constants.EXCEPTION_NULL_KEY);
+      }
+    }
+  }
+
+  /// getDefaultConfigurations
+  ///
+  /// Returns the default configuration
+  static LogsConfig getDefaultConfigurations() {
+    assert(_config != null);
+    return _config;
   }
 
   //Private Methods:------------------------------------------------------------

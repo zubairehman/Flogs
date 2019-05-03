@@ -20,7 +20,7 @@ init() {
     ..csvDelimiter = ", "
     ..isLogEnabled = true
     ..encryptionEnabled = false
-    ..encryptionKey = ""
+    ..encryptionKey = "123"
     ..formatType = FormatType.FORMAT_CURLY
     ..logLevelsEnabled = [LogLevel.INFO, LogLevel.ERROR]
     ..dataLogTypes = [

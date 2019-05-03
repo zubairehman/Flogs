@@ -22,6 +22,9 @@ dependencies:
   # A new flutter plugin for getting and requesting permission on Android.
   permission_handler: ^3.0.1
 
+  # XXTEA is a fast and secure encryption algorithm. This is a XXTEA library for Dart.
+  xxtea: ^2.0.2
+
   meta: ^1.1.6
   path: ^1.6.2
 

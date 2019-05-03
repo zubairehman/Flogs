@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:f_logs/constants/db_constants.dart';
+import 'package:f_logs/model/flog/flog.dart';
+import 'package:f_logs/utils/encryption/xxtea.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
@@ -16,6 +18,9 @@ class AppDatabase {
   // Completer is used for transforming synchronous code into asynchronous code.
   Completer<Database> _dbOpenCompleter;
 
+  // Key for encryption
+  var encryptionKey = "";
+
   // A private constructor. Allows us to create instances of AppDatabase
   // only from within the AppDatabase class itself.
   AppDatabase._();
@@ -25,6 +30,7 @@ class AppDatabase {
     // If completer is null, AppDatabaseClass is newly instantiated, so database is not yet opened
     if (_dbOpenCompleter == null) {
       _dbOpenCompleter = Completer();
+
       // Calling _openDatabase will also complete the completer with database instance
       _openDatabase();
     }
@@ -37,10 +43,24 @@ class AppDatabase {
   Future _openDatabase() async {
     // Get a platform-specific directory where persistent app data can be stored
     final appDocumentDir = await getApplicationDocumentsDirectory();
+
     // Path with the form: /platform-specific-directory/demo.db
     final dbPath = join(appDocumentDir.path, DBConstants.DB_NAME);
 
-    final database = await databaseFactoryIo.openDatabase(dbPath);
+    // Check to see if encryption is set, then provide codec
+    // else init normal db with path
+    var database;
+    if (FLog.getDefaultConfigurations().encryptionEnabled &&
+        FLog.getDefaultConfigurations().encryptionKey.isNotEmpty) {
+      // Initialize the encryption codec with a user password
+      var codec = getXXTeaSembastCodec(
+          password: FLog.getDefaultConfigurations().encryptionKey);
+
+      database = await databaseFactoryIo.openDatabase(dbPath, codec: codec);
+    } else {
+      database = await databaseFactoryIo.openDatabase(dbPath);
+    }
+
     // Any code awaiting the Completer's future will now start executing
     _dbOpenCompleter.complete(database);
   }

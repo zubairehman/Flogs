@@ -52,72 +52,6 @@ class FlogDao {
     );
   }
 
-  Future<List<Log>> getAllSortedByLogType(
-      {List<String> dataLogsType,
-      List<String> logLevels,
-      int startTimeInMillis,
-      int endTimeInMillis}) async {
-    //creating list of filters
-    List<Filter> filters = List();
-    List<Filter> timestampFilters = List();
-
-    //check to see if dataLogsType is not null
-    if (dataLogsType != null && dataLogsType.length > 0) {
-      Filter dataLogTypeFilter =
-          Filter.inList(DBConstants.FIELD_DATA_LOG_TYPE, dataLogsType);
-      filters.add(dataLogTypeFilter);
-    }
-
-    //check to see if logLevels is not null
-    if (logLevels != null && logLevels.length > 0) {
-      Filter logLevelsFilter =
-          Filter.inList(DBConstants.FIELD_LOG_LEVEL, logLevels);
-      filters.add(logLevelsFilter);
-    }
-
-    //check to see if both start and end times are provided
-    if (startTimeInMillis != null && endTimeInMillis != null) {
-      timestampFilters = [
-        Filter.greaterThan(DBConstants.FIELD_TIME_IN_MILLIS, startTimeInMillis),
-        Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS, endTimeInMillis)
-      ];
-
-      filters.addAll(timestampFilters);
-    }
-
-    //check to see if user provided start time
-    if (startTimeInMillis != null) {
-      Filter startTimeFilter = Filter.greaterThan(
-          DBConstants.FIELD_TIME_IN_MILLIS, startTimeInMillis);
-      filters.add(startTimeFilter);
-    }
-
-    //check to see if user provided end time
-    if (endTimeInMillis != null) {
-      Filter endTimeFilter =
-          Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS, endTimeInMillis);
-      filters.add(endTimeFilter);
-    }
-
-    //creating finder
-    final finder = Finder(
-        filter: Filter.and(filters),
-        sortOrders: [SortOrder(DBConstants.FIELD_DATA_LOG_TYPE)]);
-
-    final recordSnapshots = await _flogsStore.find(
-      await _db,
-      finder: finder,
-    );
-
-    // Making a List<Log> out of List<RecordSnapshot>
-    return recordSnapshots.map((snapshot) {
-      final log = Log.fromMap(snapshot.value);
-      // An ID is a key of a record from the database.
-      log.id = snapshot.key;
-      return log;
-    }).toList();
-  }
-
   Future<List<Log>> getAllSortedByFilter({List<Filter> filters}) async {
     //creating finder
     final finder = Finder(
@@ -151,4 +85,5 @@ class FlogDao {
       return log;
     }).toList();
   }
+
 }
