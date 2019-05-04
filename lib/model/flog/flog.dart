@@ -71,8 +71,6 @@ class FLog {
         timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
       );
 
-//      print(DateTimeUtils.getTimeInMillis(_config));
-
       //writing it to DB
       _writeLogs(log);
     } else {
