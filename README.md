@@ -196,13 +196,14 @@ static Future<List<Log>> getAllLogsByCustomFilter(
 
 **4. getAllLogsByFilter**
 
-A convenience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (milisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched). In-order to have full control over filters, use method provided above.
+A convenience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (millisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched) and filterType (LAST_HOUR, LAST_24_HOURS, TODAY, WEEK, ALL). In-order to have full control over filters, use method provided above.
 ```
 static Future<List<Log>> getAllLogsByFilter(
     {List<String> dataLogsType,
     List<String> logLevels,
     int startTimeInMillis,
-    int endTimeInMillis}) async {}
+    int endTimeInMillis,
+    FilterType filterType}}) async {}
 ```
 
 **5. getAllLogs**
