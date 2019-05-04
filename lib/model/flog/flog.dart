@@ -192,7 +192,8 @@ class FLog {
               dataLogsType: dataLogsType,
               logLevels: logLevels,
               startTimeInMillis: startTimeInMillis,
-              endTimeInMillis: endTimeInMillis));
+              endTimeInMillis: endTimeInMillis,
+              filterType: filterType));
     } else {
       throw new Exception(Constants.EXCEPTION_NOT_INIT);
     }

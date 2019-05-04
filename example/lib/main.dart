@@ -136,13 +136,17 @@ class _HomePageState extends State<HomePage> {
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Print Data Logs", () {
-          FLog.printDataLogs(
-            dataLogsType: [DataLogType.DEVICE.toString(), "Zubair", "Jawad"],
-            logLevels: [LogLevel.ERROR.toString(), LogLevel.WARNING.toString()],
-            filterType: FilterType.WEEK
+          FLog.printDataLogs(dataLogsType: [
+            DataLogType.DEVICE.toString(),
+            "Zubair",
+            "Jawad"
+          ], logLevels: [
+            LogLevel.ERROR.toString(),
+            LogLevel.WARNING.toString()
+          ], filterType: FilterType.WEEK
 //            startTimeInMillis: 1556132400000,
 //            endTimeInMillis: 1556650800000,
-          );
+              );
         }),
       ],
     );

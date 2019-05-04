@@ -60,7 +60,8 @@ class Filters {
     if (startTimeInMillis == null &&
         endTimeInMillis == null &&
         filterType != null) {
-      int timeInMillis = DateTimeUtils.getStartAndEndTimestamps(type: filterType);
+      int timeInMillis =
+          DateTimeUtils.getStartAndEndTimestamps(type: filterType);
 
       Filter timeFilter =
           Filter.greaterThan(DBConstants.FIELD_TIME_IN_MILLIS, timeInMillis);
