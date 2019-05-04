@@ -22,8 +22,12 @@
 * Added encryption support
 
 
-## [1.0.0] - May 03, 2019
+## [1.0.0] - May 04, 2019
 
 * Updated readme.md file
 * Added filter types
+
+## [1.0.1] - May 04, 2019
+
+* Removed unused code
 

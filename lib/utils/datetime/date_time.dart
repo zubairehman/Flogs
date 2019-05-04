@@ -84,8 +84,6 @@ class DateTimeUtils {
         startTimeInMillis = w.millisecondsSinceEpoch;
         break;
       case all:
-        // data/time now
-        var now = DateTime.now();
         // all: i am going to set it to 2019, coz i wrote this library in 2019
         // no need to go all the way back to 1970
         var all = DateTime(2019, 1, 1);
