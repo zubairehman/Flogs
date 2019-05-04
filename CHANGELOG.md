@@ -16,3 +16,8 @@
 * Updated readme.md file
 * Added wiki
 
+## [0.1.5] - May 03, 2019
+
+* Updated readme.md file
+* Added encryption support
+

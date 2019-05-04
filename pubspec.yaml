@@ -1,6 +1,6 @@
 name: f_logs
 description: FLog provides quick &amp; simple logging solution. All logs are saved to the DB which can then be exported in files.
-version: 0.0.4
+version: 0.1.5
 author: Zubair Rehman <zubairehman.work@gmail.com>
 homepage: https://github.com/zubairehman/Flogs
 
@@ -24,6 +24,9 @@ dependencies:
 
   # XXTEA is a fast and secure encryption algorithm. This is a XXTEA library for Dart.
   xxtea: ^2.0.2
+
+  # Tuple data structure
+  # tuple: ^1.0.2
 
   meta: ^1.1.6
   path: ^1.6.2

@@ -1,1 +1,1 @@
-enum FilterType { LAST_HOUR, LAST_24_HOURS, TODAY, WEEKS, ALL }
+enum FilterType { LAST_HOUR, LAST_24_HOURS, TODAY, WEEK, ALL }

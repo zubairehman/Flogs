@@ -1,4 +1,6 @@
 import 'package:f_logs/constants/db_constants.dart';
+import 'package:f_logs/utils/datetime/date_time.dart';
+import 'package:f_logs/utils/filters/filter_type.dart';
 import 'package:sembast/sembast.dart';
 
 class Filters {
@@ -8,7 +10,8 @@ class Filters {
       {List<String> dataLogsType,
       List<String> logLevels,
       int startTimeInMillis,
-      int endTimeInMillis}) {
+      int endTimeInMillis,
+      FilterType filterType}) {
     //creating list of filters
     List<Filter> filters = List();
     List<Filter> timestampFilters = List();
@@ -50,6 +53,20 @@ class Filters {
           Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS, endTimeInMillis);
       filters.add(endTimeFilter);
     }
+
+    //check to see if user provided FilterType
+    //if either start or end time is provided, this will not be executed
+    //this will have less priority over them
+    if (startTimeInMillis == null &&
+        endTimeInMillis == null &&
+        filterType != null) {
+      int timeInMillis = DateTimeUtils.getStartAndEndTimestamps(type: filterType);
+
+      Filter timeFilter =
+          Filter.greaterThan(DBConstants.FIELD_TIME_IN_MILLIS, timeInMillis);
+      filters.add(timeFilter);
+    }
+
     return filters;
   }
 }

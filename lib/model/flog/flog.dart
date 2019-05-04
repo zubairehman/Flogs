@@ -4,6 +4,7 @@ import 'package:f_logs/model/flog/flog_config.dart';
 import 'package:f_logs/model/flog/log.dart';
 import 'package:f_logs/model/flog/log_level.dart';
 import 'package:f_logs/utils/datetime/date_time.dart';
+import 'package:f_logs/utils/filters/filter_type.dart';
 import 'package:f_logs/utils/filters/filters.dart';
 import 'package:f_logs/utils/formatter/formatter.dart';
 import 'package:f_logs/utils/storage/logs_storage.dart';
@@ -104,7 +105,8 @@ class FLog {
       {List<String> dataLogsType,
       List<String> logLevels,
       int startTimeInMillis,
-      int endTimeInMillis}) async {
+      int endTimeInMillis,
+      FilterType filterType}) async {
     print(Constants.PRINT_DATA_LOG_MSG);
 
     _getAllSortedByFilter(
@@ -112,7 +114,8 @@ class FLog {
                 dataLogsType: dataLogsType,
                 logLevels: logLevels,
                 startTimeInMillis: startTimeInMillis,
-                endTimeInMillis: endTimeInMillis))
+                endTimeInMillis: endTimeInMillis,
+                filterType: filterType))
         .then((logs) {
       var buffer = StringBuffer();
 
@@ -179,7 +182,8 @@ class FLog {
       {List<String> dataLogsType,
       List<String> logLevels,
       int startTimeInMillis,
-      int endTimeInMillis}) async {
+      int endTimeInMillis,
+      FilterType filterType}) async {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then dont do anything
     if (_isLogsConfigValid()) {
