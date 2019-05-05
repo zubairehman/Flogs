@@ -132,7 +132,14 @@ class FLog {
         buffer.write(Formatter.format(log, _config));
       });
 
-      print(buffer.toString());
+      if (logs.length > 0) {
+        logs.forEach((log) {
+          buffer.write(Formatter.format(log, _config));
+        });
+        print(buffer.toString());
+      } else {
+        print("No logs found!");
+      }
       buffer.clear();
     });
   }

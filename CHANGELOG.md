@@ -36,7 +36,7 @@
 * Added convenience methods for log levels
 * Added default configuration
 * Changed className and methodName to optional
-* updated readme.me
+* Updated readme.me
 
 
 
