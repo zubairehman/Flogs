@@ -99,41 +99,37 @@ To save logs, simply call any of the method mentioned below:
 **1. Simple Info Log**
 
 ```dart
-    FLog.logThis(
+    FLog.info(
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "My log",
-      type: LogLevel.INFO);
+      text: "My log");
 ```
 
 **2. Simple Warning Log**
 
 ```dart
-    FLog.logThis(
+    FLog.warning(
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "My log",
-      type: LogLevel.WARNING);
+      text: "My log";
 ```
 
 **3. Error Log**
 
 ```dart
-    FLog.logThis(
+    FLog.error(
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "My log",
-      type: LogLevel.ERROR);
+      text: "My log");
 ```
 
 **4. Severe Log**
 
 ```dart
-    FLog.logThis(
+    FLog.severe(
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "My log",
-      type: LogLevel.SEVERE);
+      text: "My log");
 ```
 
 **5. Exception Log**
