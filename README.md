@@ -40,7 +40,7 @@ Add this to your package's pubspec.yaml file:
 
 ```
 dependencies:
-  f_logs: ^1.0.0
+  f_logs: ^1.1.0
 ```
 
 **2. Install it**
