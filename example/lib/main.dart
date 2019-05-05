@@ -3,7 +3,6 @@ import 'package:f_logs/model/flog/flog.dart';
 import 'package:f_logs/model/flog/flog_config.dart';
 import 'package:f_logs/model/flog/log_level.dart';
 import 'package:f_logs/utils/filters/filter_type.dart';
-import 'package:f_logs/utils/formatter/formate_type.dart';
 import 'package:f_logs/utils/timestamp/timestamp_format.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -14,23 +13,29 @@ void main() {
 }
 
 init() {
-  LogsConfig config = LogsConfig()
-    ..isDebuggable = true
+  /// Configuration example 1
+//  LogsConfig config = LogsConfig()
+//    ..isDebuggable = true
+//    ..isDevelopmentDebuggingEnabled = true
+//    ..customClosingDivider = "|"
+//    ..customOpeningDivider = "|"
+//    ..csvDelimiter = ", "
+//    ..isLogsEnabled = true
+//    ..encryptionEnabled = false
+//    ..encryptionKey = "123"
+//    ..formatType = FormatType.FORMAT_CURLY
+//    ..logLevelsEnabled = [LogLevel.INFO, LogLevel.ERROR]
+//    ..dataLogTypes = [
+//      DataLogType.DEVICE.toString(),
+//      DataLogType.NETWORK.toString(),
+//      "Zubair"
+//    ]
+//    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_1;
+
+  /// Configuration example 2
+  LogsConfig config = FLog.getDefaultConfigurations()
     ..isDevelopmentDebuggingEnabled = true
-    ..customClosingDivider = "|"
-    ..customOpeningDivider = "|"
-    ..csvDelimiter = ", "
-    ..isLogEnabled = true
-    ..encryptionEnabled = false
-    ..encryptionKey = "123"
-    ..formatType = FormatType.FORMAT_CURLY
-    ..logLevelsEnabled = [LogLevel.INFO, LogLevel.ERROR]
-    ..dataLogTypes = [
-      DataLogType.DEVICE.toString(),
-      DataLogType.NETWORK.toString(),
-      "Zubair"
-    ]
-    ..timestampFormat = TimestampFormat.TIME_FORMAT_READABLE;
+    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_2;
 
   FLog.applyConfigurations(config);
 }
@@ -60,7 +65,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _buildTextField(),
-              _buildRow1(),
+              _buildRow1(context),
               _buildRow2(),
               _buildRow3(),
             ],
@@ -77,33 +82,33 @@ class _HomePageState extends State<HomePage> {
 //    );
   }
 
-  _buildRow1() {
+  _buildRow1(BuildContext context) {
     return Row(
       children: <Widget>[
         _buildButton("Log Event", () {
           for (int i = 0; i < 2; i++) {
             if (i % 2 == 0) {
               FLog.logThis(
-                  className: "HomePage",
-                  methodName: "_buildRow1",
-                  text: "My log",
-                  type: LogLevel.INFO,
-                  dataLogType: DataLogType.DEVICE.toString());
-            } else {
-              FLog.logThis(
-                  className: "HomePage",
-                  methodName: "_buildRow1",
-                  text: "My log",
-                  type: LogLevel.ERROR,
-                  dataLogType: "Zubair",
-                  exception: Exception("This is a test"));
-            }
-            FLog.logThis(
                 className: "HomePage",
                 methodName: "_buildRow1",
                 text: "My log",
-                dataLogType: "Umair",
-                type: LogLevel.WARNING);
+                type: LogLevel.INFO,
+                dataLogType: DataLogType.DEVICE.toString(),
+              );
+            } else {
+              FLog.error(
+                text: "My log",
+                dataLogType: "Zubair",
+                className: "Home",
+                exception: Exception("This is a test"),
+              );
+            }
+            FLog.warning(
+              className: "HomePage",
+              methodName: "_buildRow1",
+              text: "My log",
+              dataLogType: "Umair",
+            );
           }
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),

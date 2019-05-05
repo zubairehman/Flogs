@@ -31,3 +31,13 @@
 
 * Removed unused code
 
+## [1.1.0] - May 05, 2019
+
+* Added convenience methods for log levels
+* Added default configuration
+* Changed className and methodName to optional
+* updated readme.me
+
+
+
+

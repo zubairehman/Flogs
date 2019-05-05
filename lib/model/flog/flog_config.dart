@@ -6,7 +6,7 @@ import 'package:f_logs/utils/timestamp/timestamp_format.dart';
 class LogsConfig {
   var isDebuggable = true; //print logs in Logcat
   var isDevelopmentDebuggingEnabled = false; //print logs in Logcat
-  var isLogEnabled = true; //Logs are enabled
+  var isLogsEnabled = true; //Logs are enabled
   var logLevelsEnabled =
       List<LogLevel>(); //Levels like Info, Warning, Error, Severe
   var dataLogTypes = [
