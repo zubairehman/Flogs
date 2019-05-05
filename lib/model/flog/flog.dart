@@ -128,10 +128,6 @@ class FLog {
     _getAllLogs().then((logs) {
       var buffer = StringBuffer();
 
-      logs.forEach((log) {
-        buffer.write(Formatter.format(log, _config));
-      });
-
       if (logs.length > 0) {
         logs.forEach((log) {
           buffer.write(Formatter.format(log, _config));

@@ -38,6 +38,10 @@
 * Changed className and methodName to optional
 * Updated readme.me
 
+## [1.1.1] - May 05, 2019
+
+* Bugfix in print logs function
+
 
 
 
