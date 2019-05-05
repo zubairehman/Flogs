@@ -8,17 +8,10 @@ import 'package:f_logs/utils/filters/filter_type.dart';
 import 'package:f_logs/utils/filters/filters.dart';
 import 'package:f_logs/utils/formatter/formatter.dart';
 import 'package:f_logs/utils/storage/logs_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:sembast/sembast.dart';
-
-//Milliseconds for testing
-//1st may: 1556650800000
-//30 april: 1556564400000
-//29 april: 1556478000000
-//28 april: 1556391600000
-//27 april: 1556305200000
-//26 april: 1556218800000
-//25 april: 1556132400000
+import 'package:stack_trace/stack_trace.dart';
 
 class FLog {
   // flogs data source
@@ -28,7 +21,7 @@ class FLog {
   static final LogsStorage _storage = LogsStorage.instance;
 
   //logs configuration
-  static LogsConfig _config;
+  static LogsConfig _config = LogsConfig();
 
   // A private constructor. Allows us to create instances of FLog
   // only from within the FLog class itself.
@@ -44,38 +37,86 @@ class FLog {
   /// @param text         the text
   /// @param type         the type
   static logThis({
-    @required String className,
-    @required String methodName,
+    String className,
+    String methodName,
     @required String text,
     @required LogLevel type,
     Exception exception,
     String dataLogType,
   }) async {
-    assert(className != null);
-    assert(methodName != null);
-    assert(text != null);
-    assert(type != null);
+    _logThis(className, methodName, text, type, exception, dataLogType);
+  }
 
-    //check to see if user provides a valid configuration and logs are enabled
-    //if not then don't d anything
-    if (_isLogsConfigValid()) {
-      //creating log object
-      Log log = Log(
-        className: className,
-        methodName: methodName,
-        text: text,
-        logLevel: type,
-        dataLogType: dataLogType,
-        exception: exception.toString(),
-        timestamp: DateTimeUtils.getCurrentTimestamp(_config),
-        timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
-      );
+  /// info
+  ///
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  ///
+  /// @param className    the class name
+  /// @param methodName the method name
+  /// @param text         the text
+  static info({
+    String className,
+    String methodName,
+    @required String text,
+    Exception exception,
+    String dataLogType,
+  }) async {
+    _logThis(
+        className, methodName, text, LogLevel.INFO, exception, dataLogType);
+  }
 
-      //writing it to DB
-      _writeLogs(log);
-    } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
-    }
+  /// warning
+  ///
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  ///
+  /// @param className    the class name
+  /// @param methodName the method name
+  /// @param text         the text
+  static warning({
+    String className,
+    String methodName,
+    @required String text,
+    Exception exception,
+    String dataLogType,
+  }) async {
+    _logThis(
+        className, methodName, text, LogLevel.WARNING, exception, dataLogType);
+  }
+
+  /// error
+  ///
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  ///
+  /// @param className    the class name
+  /// @param methodName the method name
+  /// @param text         the text
+  static error({
+    String className,
+    String methodName,
+    @required String text,
+    Exception exception,
+    String dataLogType,
+  }) async {
+    _logThis(
+        className, methodName, text, LogLevel.ERROR, exception, dataLogType);
+  }
+
+  /// error
+  ///
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  ///
+  /// @param className    the class name
+  /// @param methodName the method name
+  /// @param text         the text
+  static severe({
+    String className,
+    String methodName,
+    @required String text,
+    Exception exception,
+    String dataLogType,
+  }) async {
+    _logThis(
+        className, methodName, text, LogLevel.SEVERE, exception, dataLogType);
   }
 
   /// printLogs
@@ -244,6 +285,53 @@ class FLog {
   }
 
   //Private Methods:------------------------------------------------------------
+  /// _logThis
+  ///
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  ///
+  /// @param className    the class name
+  /// @param methodName the method name
+  /// @param text         the text
+  /// @param type         the type
+  static void _logThis(String className, String methodName, String text,
+      LogLevel type, Exception exception, String dataLogType) {
+    assert(text != null);
+    assert(type != null);
+
+    //check to see if className is not provided
+    //then its already been taken from calling class
+    if (className == null) {
+      className = Trace.current().frames[2].member.split(".")[0];
+    }
+
+    //check to see if methodName is not provided
+    //then its already been taken from calling class
+    if (methodName == null) {
+      methodName = Trace.current().frames[2].member.split(".")[1];
+    }
+
+    //check to see if user provides a valid configuration and logs are enabled
+    //if not then don't do anything
+    if (_isLogsConfigValid()) {
+      //creating log object
+      Log log = Log(
+        className: className,
+        methodName: methodName,
+        text: text,
+        logLevel: LogLevel.INFO,
+        dataLogType: dataLogType,
+        exception: exception.toString(),
+        timestamp: DateTimeUtils.getCurrentTimestamp(_config),
+        timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
+      );
+
+      //writing it to DB
+      _writeLogs(log);
+    } else {
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+    }
+  }
+
   /// _getAllLogs
   ///
   /// This will return the list of logs stored in database
@@ -294,6 +382,6 @@ class FLog {
   /// if yes, then it will return true
   /// else it will return false
   static _isLogsConfigValid() {
-    return _config != null && _config.isLogEnabled;
+    return _config != null && _config.isLogsEnabled;
   }
 }

@@ -164,12 +164,12 @@ FLogs provide many convenience methods to save logs into or to fetch them from d
 
 **1. logThis**
 
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or if you want to log data. The difference between FLog and DataLogs is described above, you can also check out wiki for more details.
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. The difference between FLog and DataLogs is described above, you can also check out wiki for more details. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
 ```dart
 static logThis({
-    @required String className,
-    @required String methodName,
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
     @required String text,
     @required LogLevel type,
     Exception exception,
@@ -177,14 +177,74 @@ static logThis({
 }){}
 ```
 
-**2. printLogs**
+**2. info**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart
+static info({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+}){}
+
+```
+
+**3. warning**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart
+static warning({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+}){}
+
+```
+
+**4. error**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart
+static error({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+}){}
+
+```
+
+**5. severe**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart
+static severe({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+}){}
+
+```
+
+**6. printLogs**
 
 Fetches all the logs from database and prints them as a string using StringBuffer()
 ```
 static printLogs() async {}
 ```
 
-**3. getAllLogsByCustomFilter**
+**7. getAllLogsByCustomFilter**
 
 Accepts list of filters as an arguments and returns list of logs based on the provided filters. The use of Filters with their usage is explaned in wiki, please checkout wiki for more details.
 ```
@@ -194,7 +254,7 @@ static Future<List<Log>> getAllLogsByCustomFilter(
     {List<Filter> filters}) async {}
 ```
 
-**4. getAllLogsByFilter**
+**8. getAllLogsByFilter**
 
 A convenience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (millisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched) and filterType (FilterType.LAST_HOUR, FilterType.LAST_24_HOURS, FilterType.TODAY, FilterType.WEEK, FilterType.ALL). Filter type can't be used with `startTimeInMillis`, `endTimeInMillis`, if so the priority will be given to `startTimeInMillis`, `endTimeInMillis`. In-order to have full control over filters, use method provided above.
 ```
@@ -206,28 +266,28 @@ static Future<List<Log>> getAllLogsByFilter(
     FilterType filterType}}) async {}
 ```
 
-**5. getAllLogs**
+**9. getAllLogs**
 
 Fetches all the logs from database and returns a list of logs.
 ```
 static Future<List<Log>> getAllLogs() async {}
 ```
 
-**6. exportLogs**
+**10. exportLogs**
 
 Exports logs to external storage under FLog directory.
 ```
 static exportLogs() async {}
 ```
 
-**7. clearLogs**
+**11. clearLogs**
 
 Clears all the logs stored in database.
 ```
 static clearLogs() {}
 ```
 
-**8. applyConfigurations**
+**12. applyConfigurations**
 
 Apply user provided configurations to FLogs.
 ```
