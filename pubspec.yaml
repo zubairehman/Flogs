@@ -13,7 +13,7 @@ dependencies:
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
   sembast: ^1.15.1
-  path_provider: ^0.5.0+1
+  path_provider: ^1.1.0
 
   # This package provides internationalization and localization facilities, including message
   # translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
