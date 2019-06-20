@@ -321,7 +321,7 @@ class FLog {
         className: className,
         methodName: methodName,
         text: text,
-        logLevel: LogLevel.INFO,
+        logLevel: type,
         dataLogType: dataLogType,
         exception: exception.toString(),
         timestamp: DateTimeUtils.getCurrentTimestamp(_config),
