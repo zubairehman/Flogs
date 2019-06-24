@@ -40,7 +40,7 @@ Add this to your package's pubspec.yaml file:
 
 ```
 dependencies:
-  f_logs: ^1.1.0
+  f_logs: ^1.0.x
 ```
 
 **2. Install it**
@@ -111,7 +111,7 @@ To save logs, simply call any of the method mentioned below:
     FLog.warning(
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "My log");
+      text: "My log";
 ```
 
 **3. Error Log**

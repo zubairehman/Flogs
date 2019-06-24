@@ -128,11 +128,14 @@ class FLog {
     _getAllLogs().then((logs) {
       var buffer = StringBuffer();
 
-      logs.forEach((log) {
-        buffer.write(Formatter.format(log, _config));
-      });
-
-      print(buffer.toString());
+      if (logs.length > 0) {
+        logs.forEach((log) {
+          buffer.write(Formatter.format(log, _config));
+        });
+        print(buffer.toString());
+      } else {
+        print("No logs found!");
+      }
       buffer.clear();
     });
   }
@@ -318,7 +321,7 @@ class FLog {
         className: className,
         methodName: methodName,
         text: text,
-        logLevel: LogLevel.INFO,
+        logLevel: type,
         dataLogType: dataLogType,
         exception: exception.toString(),
         timestamp: DateTimeUtils.getCurrentTimestamp(_config),

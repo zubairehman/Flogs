@@ -1,6 +1,6 @@
 name: f_logs
 description: FLog provides quick &amp; simple logging solution. All logs are saved to the DB which can then be exported in files.
-version: 1.1.0
+version: 1.1.2
 author: Zubair Rehman <zubairehman.work@gmail.com>
 homepage: https://github.com/zubairehman/Flogs
 
@@ -13,7 +13,7 @@ dependencies:
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
   sembast: ^1.15.1
-  path_provider: ^0.5.0+1
+  path_provider: ^1.1.0
 
   # This package provides internationalization and localization facilities, including message
   # translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
@@ -30,6 +30,7 @@ dependencies:
 
   meta: ^1.1.6
   path: ^1.6.2
+  stack_trace: ^1.9.3
 
 
 

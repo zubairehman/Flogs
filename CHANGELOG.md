@@ -36,7 +36,16 @@
 * Added convenience methods for log levels
 * Added default configuration
 * Changed className and methodName to optional
-* updated readme.me
+* Updated readme.me
+
+## [1.1.1] - May 05, 2019
+
+* Bugfix in print logs function
+
+## [1.1.2] - May 05, 2019
+
+* Updated readme.md file
+* Fixed LogLevel issue
 
 
 
