@@ -42,6 +42,11 @@
 
 * Bugfix in print logs function
 
+## [1.1.2] - May 05, 2019
+
+* Updated readme.md file
+* Fixed LogLevel issue
+
 
 
 
