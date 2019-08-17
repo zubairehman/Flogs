@@ -47,6 +47,11 @@
 * Updated readme.md file
 * Fixed LogLevel issue
 
+## [1.2.0] - Jul 20, 2019
+
+* Fixed logs delete issue
+* Upgraded to v2.0
+
 
 
 

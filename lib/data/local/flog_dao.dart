@@ -59,7 +59,7 @@ class FlogDao {
   }
 
   Future deleteAll() async {
-    await _flogsStore.drop(
+    await _flogsStore.delete(
       await _db,
     );
   }
