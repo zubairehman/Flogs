@@ -1,6 +1,6 @@
 ![banner](https://github.com/zubairehman/Flogs/blob/master/images/flogs-banner.png)
 
-# FLogs Advance Logging Framework [![pub package](https://img.shields.io/pub/v/f_logs.svg)](https://pub.dev/packages/f_logs)
+# FLogs Advance Logging Framework
 
 FLog is an Advanced Logging Framework develop in flutter that provides quick & simple logging solution. All logs are saved to the DB which can then be exported as a zip file.
 
@@ -29,7 +29,7 @@ Features
 13. Export all or single types of logs
 14. Advanced Automation for deleting logs automatically
 15. Exports HTML formatted exceptions
-
+16. Log level support
                 
 Use this package as a library
 -----------------------------
@@ -96,7 +96,25 @@ Log files are exported on storage directory so it's very important to add these 
 
 To save logs, simply call any of the method mentioned below:
 
-**1. Simple Info Log**
+**1. Simple Trace Log**
+
+```dart 
+    FLog.trace(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log");
+```
+
+**2. Simple Debug Log**
+
+```dart 
+    FLog.debug(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log");
+```
+
+**3. Simple Info Log**
 
 ```dart 
     FLog.info(
@@ -105,7 +123,7 @@ To save logs, simply call any of the method mentioned below:
       text: "My log");
 ```
 
-**2. Simple Warning Log**
+**4. Simple Warning Log**
 
 ```dart 
     FLog.warning(
@@ -114,7 +132,7 @@ To save logs, simply call any of the method mentioned below:
       text: "My log";
 ```
 
-**3. Error Log**
+**5. Simple Error Log**
 
 ```dart 
     FLog.error(
@@ -123,7 +141,7 @@ To save logs, simply call any of the method mentioned below:
       text: "My log");
 ```
 
-**4. Severe Log**
+**6. Simple Severe Log**
 
 ```dart 
     FLog.severe(
@@ -132,7 +150,7 @@ To save logs, simply call any of the method mentioned below:
       text: "My log");
 ```
 
-**5. Exception Log**
+**7. Severe Log with Exception**
 
 ```dart 
     FLog.logThis(
@@ -143,7 +161,16 @@ To save logs, simply call any of the method mentioned below:
       exception: Exception("This is an Exception!"));
 ```
 
-**6. Data Log**
+**8. Simple Fatal Log**
+
+```dart 
+    FLog.fatal(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log");
+```
+
+**9. Data Type Log**
 
 ```dart 
     FLog.logThis(
@@ -173,7 +200,35 @@ static logThis({
 }){}
 ```
 
-**2. info**
+**2. trace**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart 
+static trace({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+}){}
+```
+
+**3. debug**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart 
+static debug({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+}){}
+```
+
+**4. info**
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
@@ -187,7 +242,7 @@ static info({
 }){}
 ```
 
-**3. warning**
+**5. warning**
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
@@ -202,7 +257,7 @@ static warning({
 
 ```
 
-**4. error**
+**6. error**
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
@@ -217,7 +272,7 @@ static error({
 
 ```
 
-**5. severe**
+**7. severe**
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
@@ -232,7 +287,22 @@ static severe({
 
 ```
 
-**6. printLogs**
+**8. fatal**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart 
+static fatal({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+}){}
+
+```
+
+**9. printLogs**
 
 Fetches all the logs from database and prints them as a string using StringBuffer()
 
@@ -240,7 +310,7 @@ Fetches all the logs from database and prints them as a string using StringBuffe
 static printLogs() async {}
 ```
 
-**7. getAllLogsByCustomFilter**
+**10. getAllLogsByCustomFilter**
 
 Accepts list of filters as an arguments and returns list of logs based on the provided filters. The use of Filters with their usage is explained in wiki, please checkout wiki for more details.
 
@@ -251,7 +321,7 @@ static Future<List<Log>> getAllLogsByCustomFilter(
     {List<Filter> filters}) async {}
 ```
 
-**8. getAllLogsByFilter**
+**11. getAllLogsByFilter**
 
 A convenience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (millisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched) and filterType (FilterType.LAST_HOUR, FilterType.LAST_24_HOURS, FilterType.TODAY, FilterType.WEEK, FilterType.ALL). Filter type can't be used with `startTimeInMillis`, `endTimeInMillis`, if so the priority will be given to `startTimeInMillis`, `endTimeInMillis`. In-order to have full control over filters, use method provided above.
 
@@ -264,7 +334,7 @@ static Future<List<Log>> getAllLogsByFilter(
     FilterType filterType}}) async {}
 ```
 
-**9. getAllLogs**
+**12. getAllLogs**
 
 Fetches all the logs from database and returns a list of logs.
 
@@ -272,7 +342,7 @@ Fetches all the logs from database and returns a list of logs.
 static Future<List<Log>> getAllLogs() async {}
 ```
 
-**10. exportLogs**
+**13. exportLogs**
 
 Exports logs to external storage under FLog directory.
 
@@ -280,7 +350,7 @@ Exports logs to external storage under FLog directory.
 static exportLogs() async {}
 ```
 
-**11. clearLogs**
+**14. clearLogs**
 
 Clears all the logs stored in database.
 
@@ -288,7 +358,7 @@ Clears all the logs stored in database.
 static clearLogs() {}
 ```
 
-**12. applyConfigurations**
+**15. applyConfigurations**
 
 Apply user provided configurations to FLogs.
 
@@ -296,7 +366,7 @@ Apply user provided configurations to FLogs.
 static applyConfigurations(LogsConfig config) {}
 ```
 
-**13. deleteAllLogsByFilter**
+**16. deleteAllLogsByFilter**
 
 Accepts list of filters as an arguments and delete logs based on the provided filters. The use of Filters with their usage is explained in wiki, please checkout wiki for more details.
 

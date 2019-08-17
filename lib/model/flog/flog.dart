@@ -44,7 +44,46 @@ class FLog {
     Exception exception,
     String dataLogType,
   }) async {
-    _logThis(className, methodName, text, type, exception, dataLogType);
+    // prevent to write LogLevel.ALL and LogLevel.OFF to db
+    if (![LogLevel.OFF, LogLevel.ALL].contains(type)) {
+      _logThis(className, methodName, text, type, exception, dataLogType);
+    }
+  }
+
+  /// trace
+  ///
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  ///
+  /// @param className    the class name
+  /// @param methodName the method name
+  /// @param text         the text
+  static trace({
+    String className,
+    String methodName,
+    @required String text,
+    Exception exception,
+    String dataLogType,
+  }) async {
+    _logThis(
+        className, methodName, text, LogLevel.TRACE, exception, dataLogType);
+  }
+
+  /// debug
+  ///
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  ///
+  /// @param className    the class name
+  /// @param methodName the method name
+  /// @param text         the text
+  static debug({
+    String className,
+    String methodName,
+    @required String text,
+    Exception exception,
+    String dataLogType,
+  }) async {
+    _logThis(
+        className, methodName, text, LogLevel.DEBUG, exception, dataLogType);
   }
 
   /// info
@@ -101,7 +140,7 @@ class FLog {
         className, methodName, text, LogLevel.ERROR, exception, dataLogType);
   }
 
-  /// error
+  /// severe
   ///
   /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
   ///
@@ -117,6 +156,24 @@ class FLog {
   }) async {
     _logThis(
         className, methodName, text, LogLevel.SEVERE, exception, dataLogType);
+  }
+
+  /// fatal
+  ///
+  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  ///
+  /// @param className    the class name
+  /// @param methodName the method name
+  /// @param text         the text
+  static fatal({
+    String className,
+    String methodName,
+    @required String text,
+    Exception exception,
+    String dataLogType,
+  }) async {
+    _logThis(
+        className, methodName, text, LogLevel.FATAL, exception, dataLogType);
   }
 
   /// printLogs
@@ -382,11 +439,17 @@ class FLog {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
-      await _flogDao.insert(log);
+      // skip write logs when log level is to low or
+      // active log level is not in enabled log levels
+      if (LogLevel.values.indexOf(_config.activeLogLevel) <=
+              LogLevel.values.indexOf(log.logLevel) &&
+          _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
+        await _flogDao.insert(log);
 
-      //check to see if logcat debugging is enabled
-      if (_config.isDebuggable) {
-        print(Formatter.format(log, _config));
+        //check to see if logcat debugging is enabled
+        if (_config.isDebuggable) {
+          print(Formatter.format(log, _config));
+        }
       }
     } else {
       throw new Exception(Constants.EXCEPTION_NOT_INIT);

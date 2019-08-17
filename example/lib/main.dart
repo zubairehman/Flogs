@@ -112,6 +112,13 @@ class _HomePageState extends State<HomePage> {
               text: "My log",
               dataLogType: "Umair",
             );
+            // not logged because this LogLevel is lower then default INFO
+            FLog.trace(
+              className: "HomePage",
+              methodName: "_buildRow1",
+              text: "My log",
+              dataLogType: "Umair",
+            );
           }
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
