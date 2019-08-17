@@ -46,6 +46,18 @@ class FlogDao {
     );
   }
 
+  Future<int> deleteAllLogsByFilter({List<Filter> filters}) async {
+    final finder = Finder(
+      filter: Filter.and(filters),
+    );
+
+    int deleted = await _flogsStore.delete(
+      await _db,
+      finder: finder,
+    );
+    return deleted;
+  }
+
   Future deleteAll() async {
     await _flogsStore.drop(
       await _db,
