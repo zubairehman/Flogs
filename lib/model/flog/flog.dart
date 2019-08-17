@@ -209,7 +209,7 @@ class FLog {
   /// This will return the list of logs stored in database
   static Future<List<Log>> getAllLogs() async {
     //check to see if user provides a valid configuration and logs are enabled
-    //if not then dont do anything
+    //if not then don't do anything
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllLogs();
     } else {
@@ -227,7 +227,7 @@ class FLog {
       int endTimeInMillis,
       FilterType filterType}) async {
     //check to see if user provides a valid configuration and logs are enabled
-    //if not then dont do anything
+    //if not then don't do anything
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllSortedByFilter(
           filters: Filters.generateFilters(
@@ -248,7 +248,7 @@ class FLog {
   static Future<List<Log>> getAllLogsByCustomFilter(
       {List<Filter> filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
-    //if not then dont do anything
+    //if not then don't do anything
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllSortedByFilter(filters: filters);
     } else {
@@ -262,6 +262,20 @@ class FLog {
   static clearLogs() {
     _flogDao.deleteAll();
     print("Logs Cleared!");
+  }
+
+  /// deleteAllLogsByFilter
+  ///
+  /// This will delete logs by provided filters
+  static deleteAllLogsByFilter({List<Filter> filters}) async {
+    //check to see if user provides a valid configuration and logs are enabled
+    //if not then don't do anything
+    if (_isLogsConfigValid()) {
+      int deleted = await _flogDao.deleteAllLogsByFilter(filters: filters);
+      print("Deleted $deleted logs");
+    } else {
+      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+    }
   }
 
   /// applyConfigurations
@@ -340,7 +354,7 @@ class FLog {
   /// This will return the list of logs stored in database
   static Future<List<Log>> _getAllLogs() async {
     //check to see if user provides a valid configuration and logs are enabled
-    //if not then dont do anything
+    //if not then don't do anything
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllLogs();
     } else {
@@ -353,7 +367,7 @@ class FLog {
   /// This will return the list of logs sorted by provided filters
   static Future<List<Log>> _getAllSortedByFilter({List<Filter> filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
-    //if not then dont do anything
+    //if not then don't do anything
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllSortedByFilter(filters: filters);
     } else {

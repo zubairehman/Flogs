@@ -1,3 +1,4 @@
+import 'package:f_logs/constants/db_constants.dart';
 import 'package:f_logs/model/datalog/data_log_type.dart';
 import 'package:f_logs/model/flog/flog.dart';
 import 'package:f_logs/model/flog/flog_config.dart';
@@ -6,6 +7,7 @@ import 'package:f_logs/utils/filters/filter_type.dart';
 import 'package:f_logs/utils/timestamp/timestamp_format.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sembast/sembast.dart';
 
 void main() {
   init();
@@ -68,6 +70,7 @@ class _HomePageState extends State<HomePage> {
               _buildRow1(context),
               _buildRow2(),
               _buildRow3(),
+              _buildRow4(),
             ],
           ),
         ),
@@ -153,6 +156,22 @@ class _HomePageState extends State<HomePage> {
 //            endTimeInMillis: 1556650800000,
               );
         }),
+      ],
+    );
+  }
+
+  _buildRow4() {
+    return Row(
+      children: <Widget>[
+        _buildButton(
+            "Delete Logs by Filter (is set older then 10 seconds here)", () {
+          FLog.deleteAllLogsByFilter(filters: [
+            Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS,
+                DateTime.now().millisecondsSinceEpoch - 1000 * 10)
+          ]);
+        }),
+        Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
+        _buildButton("", () {}),
       ],
     );
   }
