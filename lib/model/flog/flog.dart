@@ -43,10 +43,12 @@ class FLog {
     @required LogLevel type,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
   }) async {
     // prevent to write LogLevel.ALL and LogLevel.OFF to db
     if (![LogLevel.OFF, LogLevel.ALL].contains(type)) {
-      _logThis(className, methodName, text, type, exception, dataLogType);
+      _logThis(className, methodName, text, type, exception, dataLogType,
+          stacktrace);
     }
   }
 
@@ -63,9 +65,10 @@ class FLog {
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
   }) async {
-    _logThis(
-        className, methodName, text, LogLevel.TRACE, exception, dataLogType);
+    _logThis(className, methodName, text, LogLevel.TRACE, exception,
+        dataLogType, stacktrace);
   }
 
   /// debug
@@ -81,9 +84,10 @@ class FLog {
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
   }) async {
-    _logThis(
-        className, methodName, text, LogLevel.DEBUG, exception, dataLogType);
+    _logThis(className, methodName, text, LogLevel.DEBUG, exception,
+        dataLogType, stacktrace);
   }
 
   /// info
@@ -99,9 +103,10 @@ class FLog {
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
   }) async {
-    _logThis(
-        className, methodName, text, LogLevel.INFO, exception, dataLogType);
+    _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType,
+        stacktrace);
   }
 
   /// warning
@@ -117,9 +122,10 @@ class FLog {
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
   }) async {
-    _logThis(
-        className, methodName, text, LogLevel.WARNING, exception, dataLogType);
+    _logThis(className, methodName, text, LogLevel.WARNING, exception,
+        dataLogType, stacktrace);
   }
 
   /// error
@@ -135,9 +141,10 @@ class FLog {
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
   }) async {
-    _logThis(
-        className, methodName, text, LogLevel.ERROR, exception, dataLogType);
+    _logThis(className, methodName, text, LogLevel.ERROR, exception,
+        dataLogType, stacktrace);
   }
 
   /// severe
@@ -153,9 +160,10 @@ class FLog {
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
   }) async {
-    _logThis(
-        className, methodName, text, LogLevel.SEVERE, exception, dataLogType);
+    _logThis(className, methodName, text, LogLevel.SEVERE, exception,
+        dataLogType, stacktrace);
   }
 
   /// fatal
@@ -171,9 +179,10 @@ class FLog {
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
   }) async {
-    _logThis(
-        className, methodName, text, LogLevel.FATAL, exception, dataLogType);
+    _logThis(className, methodName, text, LogLevel.FATAL, exception,
+        dataLogType, stacktrace);
   }
 
   /// printLogs
@@ -367,8 +376,14 @@ class FLog {
   /// @param methodName the method name
   /// @param text         the text
   /// @param type         the type
-  static void _logThis(String className, String methodName, String text,
-      LogLevel type, Exception exception, String dataLogType) {
+  static void _logThis(
+      String className,
+      String methodName,
+      String text,
+      LogLevel type,
+      Exception exception,
+      String dataLogType,
+      StackTrace stacktrace) {
     assert(text != null);
     assert(type != null);
 
@@ -397,6 +412,7 @@ class FLog {
         exception: exception.toString(),
         timestamp: DateTimeUtils.getCurrentTimestamp(_config),
         timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
+        stacktrace: stacktrace.toString(),
       );
 
       //writing it to DB
