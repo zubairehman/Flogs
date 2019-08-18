@@ -4,6 +4,8 @@ import 'package:f_logs/model/flog/flog.dart';
 import 'package:f_logs/model/flog/flog_config.dart';
 import 'package:f_logs/model/flog/log_level.dart';
 import 'package:f_logs/utils/filters/filter_type.dart';
+import 'package:f_logs/utils/formatter/field_name.dart';
+import 'package:f_logs/utils/formatter/formate_type.dart';
 import 'package:f_logs/utils/timestamp/timestamp_format.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -35,9 +37,26 @@ init() {
 //    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_1;
 
   /// Configuration example 2
+//  LogsConfig config = FLog.getDefaultConfigurations()
+//    ..isDevelopmentDebuggingEnabled = true
+//    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_2;
+
+  /// Configuration example 3 Format Custom
   LogsConfig config = FLog.getDefaultConfigurations()
     ..isDevelopmentDebuggingEnabled = true
-    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_2;
+    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_3
+    ..formatType = FormatType.FORMAT_CUSTOM
+    ..fieldOrderFormatCustom = [
+      FieldName.TIMESTAMP,
+      FieldName.LOG_LEVEL,
+      FieldName.CLASSNAME,
+      FieldName.METHOD_NAME,
+      FieldName.TEXT,
+      FieldName.EXCEPTION,
+      FieldName.STACKTRACE
+    ]
+    ..customOpeningDivider = "|"
+    ..customClosingDivider = "|";
 
   FLog.applyConfigurations(config);
 }
