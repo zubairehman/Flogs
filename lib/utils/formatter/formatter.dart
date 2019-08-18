@@ -1,5 +1,6 @@
 import 'package:f_logs/model/flog/flog_config.dart';
 import 'package:f_logs/model/flog/log.dart';
+import 'package:f_logs/utils/formatter/field_name.dart';
 import 'package:f_logs/utils/formatter/formate_type.dart';
 import 'package:flutter/foundation.dart';
 
@@ -18,8 +19,12 @@ class Formatter {
           log, config.csvDelimiter, config.isDevelopmentDebuggingEnabled);
     } else if (config.formatType.toString() ==
         FormatType.FORMAT_CUSTOM.toString()) {
-      output = _formatCustom(log, config.customOpeningDivider,
-          config.customClosingDivider, config.isDevelopmentDebuggingEnabled);
+      output = _formatCustom(
+          log,
+          config.customOpeningDivider,
+          config.customClosingDivider,
+          config.isDevelopmentDebuggingEnabled,
+          config.fieldOrderFormatCustom);
     } else {
       output = _formatCurly(log, config.isDevelopmentDebuggingEnabled);
     }
@@ -36,11 +41,12 @@ class Formatter {
       output += "{${log.text}} ";
       output += log.exception != 'null' ? "{${log.exception}} " : "";
       output += "{${log.logLevel.toString()}} ";
-      output += "{${log.timestamp}}";
+      output += "{${log.timestamp}} ";
+      output += log.stacktrace != 'null' ? "{${log.stacktrace}} " : "";
 
       if (isDevelopmentDebuggingEnabled) {
-        output += !kReleaseMode ? " {${log.dataLogType}}" : "";
-        output += !kReleaseMode ? " {${log.timeInMillis}}" : "";
+        output += !kReleaseMode ? "{${log.dataLogType}} " : "";
+        output += !kReleaseMode ? "{${log.timeInMillis}}" : "";
       }
     }
 
@@ -56,11 +62,12 @@ class Formatter {
       output += "[${log.text}] ";
       output += log.exception != 'null' ? "[${log.exception}] " : "";
       output += "[${log.logLevel.toString()}] ";
-      output += "[${log.timestamp}]";
+      output += "[${log.timestamp}] ";
+      output += log.stacktrace != 'null' ? "[${log.stacktrace}] " : "";
 
       if (isDevelopmentDebuggingEnabled) {
-        output += !kReleaseMode ? " [${log.dataLogType}]" : "";
-        output += !kReleaseMode ? " [${log.timeInMillis}]" : "";
+        output += !kReleaseMode ? "[${log.dataLogType}] " : "";
+        output += !kReleaseMode ? "[${log.timeInMillis}]" : "";
       }
     }
 
@@ -77,37 +84,63 @@ class Formatter {
       output += "${log.text}$deliminator ";
       output += log.exception != 'null' ? "${log.exception}$deliminator " : "";
       output += "${log.logLevel.toString()}$deliminator ";
-      output += "${log.timestamp}";
+      output += "${log.timestamp} ";
+      output +=
+          log.stacktrace != 'null' ? "${log.stacktrace}$deliminator " : "";
 
       if (isDevelopmentDebuggingEnabled) {
-        output += !kReleaseMode ? " ${log.dataLogType}" : "";
-        output += !kReleaseMode ? " ${log.timeInMillis}" : "";
+        output += !kReleaseMode ? "${log.dataLogType} " : "";
+        output += !kReleaseMode ? "${log.timeInMillis}" : "";
       }
     }
 
     return output;
   }
 
-  static String _formatCustom(Log log, String openingDivider,
-      String closingDivider, bool isDevelopmentDebuggingEnabled) {
-    String output;
+  static String _formatCustom(
+    Log log,
+    String openingDivider,
+    String closingDivider,
+    bool isDevelopmentDebuggingEnabled,
+    List<FieldName> fieldOrder,
+  ) {
+    String output = "";
 
-    if (log != null) {
-      output = "$openingDivider${log.className}$closingDivider ";
-      output += "$openingDivider${log.methodName}$closingDivider ";
-      output += "$openingDivider${log.text}$closingDivider ";
-      output += log.exception != 'null'
-          ? "$openingDivider${log.exception}$closingDivider "
-          : "";
-      output += "$openingDivider${log.logLevel.toString()}$closingDivider ";
-      output += "$openingDivider${log.timestamp}$closingDivider";
+    if (log != null && fieldOrder.isNotEmpty) {
+      fieldOrder.forEach((fieldName) {
+        if (fieldName == FieldName.CLASSNAME) {
+          output += "$openingDivider${log.className}$closingDivider ";
+        }
+        if (fieldName == FieldName.METHOD_NAME) {
+          output += "$openingDivider${log.methodName}$closingDivider ";
+        }
+        if (fieldName == FieldName.TEXT) {
+          output += "$openingDivider${log.text}$closingDivider ";
+        }
+        if (fieldName == FieldName.EXCEPTION) {
+          output += log.exception != 'null'
+              ? "$openingDivider${log.exception}$closingDivider "
+              : "";
+        }
+        if (fieldName == FieldName.LOG_LEVEL) {
+          output += "$openingDivider${log.logLevel.toString()}$closingDivider ";
+        }
+        if (fieldName == FieldName.TIMESTAMP) {
+          output += "$openingDivider${log.timestamp}$closingDivider ";
+        }
+        if (fieldName == FieldName.STACKTRACE) {
+          output += log.stacktrace != 'null'
+              ? "$openingDivider${log.stacktrace}$closingDivider "
+              : "";
+        }
+      });
 
       if (isDevelopmentDebuggingEnabled) {
         output += !kReleaseMode
-            ? " $openingDivider${log.dataLogType}$closingDivider"
+            ? "$openingDivider${log.dataLogType}$closingDivider "
             : "";
         output += !kReleaseMode
-            ? " $openingDivider${log.timeInMillis}$closingDivider"
+            ? "$openingDivider${log.timeInMillis}$closingDivider"
             : "";
       }
     }
