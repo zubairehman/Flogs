@@ -170,15 +170,22 @@ class _HomePageState extends State<HomePage> {
   _buildRow4() {
     return Row(
       children: <Widget>[
-        _buildButton(
-            "Delete Logs by Filter (is set older then 10 seconds here)", () {
+        _buildButton("Log Event with StackTrace", () {
+          FLog.error(
+            text: "My log",
+            dataLogType: "Zubair",
+            className: "Home",
+            exception: Exception("Exception and StackTrace"),
+            stacktrace: StackTrace.current,
+          );
+        }),
+        Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
+        _buildButton("Delete Logs by Filter (older then 10 seconds)", () {
           FLog.deleteAllLogsByFilter(filters: [
             Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS,
                 DateTime.now().millisecondsSinceEpoch - 1000 * 10)
           ]);
         }),
-        Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
-        _buildButton("", () {}),
       ],
     );
   }

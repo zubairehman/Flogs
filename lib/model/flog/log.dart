@@ -13,6 +13,7 @@ class Log {
   String dataLogType;
   int timeInMillis;
   LogLevel logLevel;
+  String stacktrace;
 
   Log({
     this.className,
@@ -23,6 +24,7 @@ class Log {
     this.exception,
     this.logLevel,
     this.dataLogType,
+    this.stacktrace,
   });
 
   Map<String, dynamic> toMap() {
@@ -35,6 +37,7 @@ class Log {
       'exception': exception,
       'dataLogType': dataLogType,
       'logLevel': LogLevelConverter.fromEnumToString(logLevel),
+      'stacktrace': stacktrace,
     };
   }
 
@@ -48,6 +51,7 @@ class Log {
       exception: map['exception'],
       dataLogType: map['dataLogType'],
       logLevel: LogLevelConverter.fromStringToEnum(map['logLevel']),
+      stacktrace: map['stacktrace'],
     );
   }
 }

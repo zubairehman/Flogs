@@ -150,7 +150,7 @@ To save logs, simply call any of the method mentioned below:
       text: "My log");
 ```
 
-**7. Severe Log with Exception**
+**7. Severe Log with Exception and StackTrace**
 
 ```dart 
     FLog.logThis(
@@ -158,7 +158,8 @@ To save logs, simply call any of the method mentioned below:
       methodName: "_buildRow1",
       text: "My log",
       type: LogLevel.SEVERE, 
-      exception: Exception("This is an Exception!"));
+      exception: Exception("This is an Exception!"),
+      stacktrace: StackTrace.current);
 ```
 
 **8. Simple Fatal Log**
@@ -197,6 +198,7 @@ static logThis({
     @required LogLevel type,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 ```
 
@@ -211,6 +213,7 @@ static trace({
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 ```
 
@@ -225,6 +228,7 @@ static debug({
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 ```
 
@@ -239,6 +243,7 @@ static info({
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 ```
 
@@ -253,6 +258,7 @@ static warning({
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 
 ```
@@ -268,6 +274,7 @@ static error({
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 
 ```
@@ -283,6 +290,7 @@ static severe({
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 
 ```
@@ -298,6 +306,7 @@ static fatal({
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 
 ```

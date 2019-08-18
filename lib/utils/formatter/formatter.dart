@@ -37,6 +37,7 @@ class Formatter {
       output += log.exception != 'null' ? "{${log.exception}} " : "";
       output += "{${log.logLevel.toString()}} ";
       output += "{${log.timestamp}}";
+      output += log.stacktrace != 'null' ? "{${log.stacktrace}} " : "";
 
       if (isDevelopmentDebuggingEnabled) {
         output += !kReleaseMode ? " {${log.dataLogType}}" : "";
@@ -57,6 +58,7 @@ class Formatter {
       output += log.exception != 'null' ? "[${log.exception}] " : "";
       output += "[${log.logLevel.toString()}] ";
       output += "[${log.timestamp}]";
+      output += log.stacktrace != 'null' ? "[${log.stacktrace}] " : "";
 
       if (isDevelopmentDebuggingEnabled) {
         output += !kReleaseMode ? " [${log.dataLogType}]" : "";
@@ -78,6 +80,8 @@ class Formatter {
       output += log.exception != 'null' ? "${log.exception}$deliminator " : "";
       output += "${log.logLevel.toString()}$deliminator ";
       output += "${log.timestamp}";
+      output +=
+          log.stacktrace != 'null' ? "${log.stacktrace}$deliminator " : "";
 
       if (isDevelopmentDebuggingEnabled) {
         output += !kReleaseMode ? " ${log.dataLogType}" : "";
@@ -101,6 +105,9 @@ class Formatter {
           : "";
       output += "$openingDivider${log.logLevel.toString()}$closingDivider ";
       output += "$openingDivider${log.timestamp}$closingDivider";
+      output += log.stacktrace != 'null'
+          ? "$openingDivider${log.stacktrace}$closingDivider "
+          : "";
 
       if (isDevelopmentDebuggingEnabled) {
         output += !kReleaseMode
