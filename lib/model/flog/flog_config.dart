@@ -1,8 +1,4 @@
-import 'package:f_logs/model/datalog/data_log_type.dart';
-import 'package:f_logs/model/flog/log_level.dart';
-import 'package:f_logs/utils/formatter/field_name.dart';
-import 'package:f_logs/utils/formatter/formate_type.dart';
-import 'package:f_logs/utils/timestamp/timestamp_format.dart';
+import 'package:f_logs/f_logs.dart';
 
 class LogsConfig {
   var isDebuggable = true; //print logs in Logcat
