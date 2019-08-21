@@ -1,6 +1,4 @@
-import 'package:f_logs/constants/db_constants.dart';
-import 'package:f_logs/data/local/app_database.dart';
-import 'package:f_logs/model/flog/log.dart';
+import 'package:f_logs/f_logs.dart';
 import 'package:sembast/sembast.dart';
 
 class FlogDao {

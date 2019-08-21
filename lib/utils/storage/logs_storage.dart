@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:f_logs/constants/constants.dart';
+import 'package:f_logs/f_logs.dart';
 import 'package:path_provider/path_provider.dart';
 
 class LogsStorage {

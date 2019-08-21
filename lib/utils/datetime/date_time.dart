@@ -1,6 +1,4 @@
-import 'package:f_logs/model/flog/flog.dart';
-import 'package:f_logs/model/flog/flog_config.dart';
-import 'package:f_logs/utils/filters/filter_type.dart';
+import 'package:f_logs/f_logs.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
