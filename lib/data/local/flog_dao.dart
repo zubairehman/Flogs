@@ -1,6 +1,4 @@
-import 'package:f_logs/constants/db_constants.dart';
-import 'package:f_logs/data/local/app_database.dart';
-import 'package:f_logs/model/flog/log.dart';
+import 'package:f_logs/f_logs.dart';
 import 'package:sembast/sembast.dart';
 
 class FlogDao {
@@ -44,6 +42,18 @@ class FlogDao {
       await _db,
       finder: finder,
     );
+  }
+
+  Future<int> deleteAllLogsByFilter({List<Filter> filters}) async {
+    final finder = Finder(
+      filter: Filter.and(filters),
+    );
+
+    int deleted = await _flogsStore.delete(
+      await _db,
+      finder: finder,
+    );
+    return deleted;
   }
 
   Future deleteAll() async {

@@ -1,4 +1,4 @@
-enum LogLevel { INFO, WARNING, ERROR, SEVERE }
+enum LogLevel { ALL, TRACE, DEBUG, INFO, WARNING, ERROR, SEVERE, FATAL, OFF }
 
 class LogLevelConverter {
   static String fromEnumToString(LogLevel type) {
