@@ -17,4 +17,5 @@ class DBConstants {
   static const FIELD_DATA_LOG_TYPE = 'dataLogType';
   static const FIELD_TIME_IN_MILLIS = 'timeInMillis';
   static const FIELD_LOG_LEVEL = 'logLevel';
+  static const FIELD_STACKTRACE = 'stacktrace';
 }

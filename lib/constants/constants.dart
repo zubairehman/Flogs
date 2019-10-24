@@ -9,7 +9,7 @@ class Constants {
       'FLog is not initialized! Please provide FLog configuration by calling FLog.applyConfigurations(LogsConfig config) in your application class';
 
   static const EXCEPTION_NULL_KEY =
-      'Encrryption key is not provided, please provide encryption key in LogsConfig';
+      'Encryption key is not provided, please provide encryption key in LogsConfig';
 
   // Print Messages
   static const PRINT_EXPORT_MSG =

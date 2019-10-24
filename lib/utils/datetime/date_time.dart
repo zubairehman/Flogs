@@ -1,6 +1,4 @@
-import 'package:f_logs/model/flog/flog.dart';
-import 'package:f_logs/model/flog/flog_config.dart';
-import 'package:f_logs/utils/filters/filter_type.dart';
+import 'package:f_logs/f_logs.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
@@ -41,7 +39,7 @@ class DateTimeUtils {
         // data/time now
         var now = DateTime.now();
         // last hour
-        var lh = now.subtract(new Duration(hours: 1));
+        var lh = now.subtract(Duration(hours: 1));
         print(lh);
         startTimeInMillis = lh.millisecondsSinceEpoch;
         break;
@@ -49,7 +47,7 @@ class DateTimeUtils {
         // data/time now
         var now = DateTime.now();
         // last twenty four hours from now
-        var tfh = now.subtract(new Duration(hours: 24));
+        var tfh = now.subtract(Duration(hours: 24));
         //print
         if (FLog.getDefaultConfigurations().isDevelopmentDebuggingEnabled) {
           print(tfh);
@@ -75,7 +73,7 @@ class DateTimeUtils {
         // midnight today
         var td = DateTime(now.year, now.month, now.day);
         // last week from today
-        var w = td.subtract(new Duration(days: 7));
+        var w = td.subtract(Duration(days: 7));
         //print
         if (FLog.getDefaultConfigurations().isDevelopmentDebuggingEnabled) {
           print(w);

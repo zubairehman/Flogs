@@ -1,6 +1,6 @@
 ![banner](https://github.com/zubairehman/Flogs/blob/master/images/flogs-banner.png)
 
-# FLogs Advance Logging Framework [![pub package](https://img.shields.io/pub/v/f_logs.svg)](https://pub.dev/packages/f_logs)
+# FLogs Advance Logging Framework
 
 FLog is an Advanced Logging Framework develop in flutter that provides quick & simple logging solution. All logs are saved to the DB which can then be exported as a zip file.
 
@@ -29,7 +29,7 @@ Features
 13. Export all or single types of logs
 14. Advanced Automation for deleting logs automatically
 15. Exports HTML formatted exceptions
-
+16. Log level support
                 
 Use this package as a library
 -----------------------------
@@ -60,20 +60,7 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 Now in your Dart code, you can use:
 
 ```
-import 'package:f_logs/constants/constants.dart';
-import 'package:f_logs/constants/db_constants.dart';
-import 'package:f_logs/data/local/app_database.dart';
-import 'package:f_logs/data/local/flog_dao.dart';
-import 'package:f_logs/model/datalog/data_log_type.dart';
-import 'package:f_logs/model/flog/flog.dart';
-import 'package:f_logs/model/flog/flog_config.dart';
-import 'package:f_logs/model/flog/log.dart';
-import 'package:f_logs/model/flog/log_level.dart';
-import 'package:f_logs/utils/filters/filters.dart';
-import 'package:f_logs/utils/formatter/formate_type.dart';
-import 'package:f_logs/utils/formatter/formatter.dart';
-import 'package:f_logs/utils/storage/logs_storage.dart';
-import 'package:f_logs/utils/timestamp/timestamp_format.dart';
+import 'package:f_logs/f_logs.dart';
 ```
 
 How to use
@@ -96,56 +83,84 @@ Log files are exported on storage directory so it's very important to add these 
 
 To save logs, simply call any of the method mentioned below:
 
-**1. Simple Info Log**
+**1. Simple Trace Log**
 
-```dart
+```dart 
+    FLog.trace(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log");
+```
+
+**2. Simple Debug Log**
+
+```dart 
+    FLog.debug(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log");
+```
+
+**3. Simple Info Log**
+
+```dart 
     FLog.info(
       className: "HomePage",
       methodName: "_buildRow1",
       text: "My log");
 ```
 
-**2. Simple Warning Log**
+**4. Simple Warning Log**
 
-```dart
+```dart 
     FLog.warning(
       className: "HomePage",
       methodName: "_buildRow1",
       text: "My log";
 ```
 
-**3. Error Log**
+**5. Simple Error Log**
 
-```dart
+```dart 
     FLog.error(
       className: "HomePage",
       methodName: "_buildRow1",
       text: "My log");
 ```
 
-**4. Severe Log**
+**6. Simple Severe Log**
 
-```dart
+```dart 
     FLog.severe(
       className: "HomePage",
       methodName: "_buildRow1",
       text: "My log");
 ```
 
-**5. Exception Log**
+**7. Severe Log with Exception and StackTrace**
 
-```dart
+```dart 
     FLog.logThis(
       className: "HomePage",
       methodName: "_buildRow1",
       text: "My log",
       type: LogLevel.SEVERE, 
-      exception: Exception("This is an Exception!"));
+      exception: Exception("This is an Exception!"),
+      stacktrace: StackTrace.current);
 ```
 
-**6. Data Log**
+**8. Simple Fatal Log**
 
-```dart
+```dart 
+    FLog.fatal(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "My log");
+```
+
+**9. Data Type Log**
+
+```dart 
     FLog.logThis(
       className: "HomePage",
       methodName: "_buildRow1",
@@ -162,7 +177,7 @@ FLogs provide many convenience methods to save logs into or to fetch them from d
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. The difference between FLog and DataLogs is described above, you can also check out wiki for more details. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
-```dart
+```dart 
 static logThis({
     String className, // This is optional if not provided, then it will automatically be taken by getting calling class
     String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
@@ -170,90 +185,143 @@ static logThis({
     @required LogLevel type,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 ```
 
-**2. info**
+**2. trace**
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
-```dart
+```dart 
+static trace({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+    StackTrace stacktrace,
+}){}
+```
+
+**3. debug**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart 
+static debug({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+    StackTrace stacktrace,
+}){}
+```
+
+**4. info**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart 
 static info({
     String className, // This is optional if not provided, then it will automatically be taken by getting calling class
     String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
-
 ```
 
-**3. warning**
+**5. warning**
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
-```dart
+```dart 
 static warning({
     String className, // This is optional if not provided, then it will automatically be taken by getting calling class
     String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 
 ```
 
-**4. error**
+**6. error**
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
-```dart
+```dart 
 static error({
     String className, // This is optional if not provided, then it will automatically be taken by getting calling class
     String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 
 ```
 
-**5. severe**
+**7. severe**
 
 Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
 
-```dart
+```dart 
 static severe({
     String className, // This is optional if not provided, then it will automatically be taken by getting calling class
     String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
     @required String text,
     Exception exception,
     String dataLogType,
+    StackTrace stacktrace,
 }){}
 
 ```
 
-**6. printLogs**
+**8. fatal**
+
+Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+
+```dart 
+static fatal({
+    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
+    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
+    @required String text,
+    Exception exception,
+    String dataLogType,
+    StackTrace stacktrace,
+}){}
+
+```
+
+**9. printLogs**
 
 Fetches all the logs from database and prints them as a string using StringBuffer()
-```
+
+```dart 
 static printLogs() async {}
 ```
 
-**7. getAllLogsByCustomFilter**
+**10. getAllLogsByCustomFilter**
 
-Accepts list of filters as an arguments and returns list of logs based on the provided filters. The use of Filters with their usage is explaned in wiki, please checkout wiki for more details.
-```
+Accepts list of filters as an arguments and returns list of logs based on the provided filters. The use of Filters with their usage is explained in wiki, please checkout wiki for more details.
+
+```dart 
 List<Filter> filters = [Filter.greaterThan('[FieldName]', '[Value]')]
 
 static Future<List<Log>> getAllLogsByCustomFilter(
     {List<Filter> filters}) async {}
 ```
 
-**8. getAllLogsByFilter**
+**11. getAllLogsByFilter**
 
 A convenience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (millisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched) and filterType (FilterType.LAST_HOUR, FilterType.LAST_24_HOURS, FilterType.TODAY, FilterType.WEEK, FilterType.ALL). Filter type can't be used with `startTimeInMillis`, `endTimeInMillis`, if so the priority will be given to `startTimeInMillis`, `endTimeInMillis`. In-order to have full control over filters, use method provided above.
-```
+
+```dart 
 static Future<List<Log>> getAllLogsByFilter(
     {List<String> dataLogsType,
     List<String> logLevels,
@@ -262,32 +330,47 @@ static Future<List<Log>> getAllLogsByFilter(
     FilterType filterType}}) async {}
 ```
 
-**9. getAllLogs**
+**12. getAllLogs**
 
 Fetches all the logs from database and returns a list of logs.
-```
+
+```dart 
 static Future<List<Log>> getAllLogs() async {}
 ```
 
-**10. exportLogs**
+**13. exportLogs**
 
 Exports logs to external storage under FLog directory.
-```
+
+```dart 
 static exportLogs() async {}
 ```
 
-**11. clearLogs**
+**14. clearLogs**
 
 Clears all the logs stored in database.
-```
+
+```dart 
 static clearLogs() {}
 ```
 
-**12. applyConfigurations**
+**15. applyConfigurations**
 
 Apply user provided configurations to FLogs.
-```
+
+```dart 
 static applyConfigurations(LogsConfig config) {}
+```
+
+**16. deleteAllLogsByFilter**
+
+Accepts list of filters as an arguments and delete logs based on the provided filters. The use of Filters with their usage is explained in wiki, please checkout wiki for more details.
+
+```dart 
+List<Filter> filters = [Filter.greaterThan('[FieldName]', '[Value]')]
+
+static deleteAllLogsByFilter(
+    {List<Filter> filters}) async {}
 ```
 
 Wiki

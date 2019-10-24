@@ -52,6 +52,14 @@
 * Fixed logs delete issue
 * Upgraded to v2.0
 
+## [1.2.1] - Oct 15, 2019
+
+* Import only one file instead of all the package files
+* Added fieldOrderFormatCustom for order fields in customized output
+* Added logging of stack traces
+* Added Log Level functionality, skipping lower Log Levels
+* Added deleteAllLogsByFilter
+
 
 
 
