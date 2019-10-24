@@ -60,20 +60,7 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 Now in your Dart code, you can use:
 
 ```
-import 'package:f_logs/constants/constants.dart';
-import 'package:f_logs/constants/db_constants.dart';
-import 'package:f_logs/data/local/app_database.dart';
-import 'package:f_logs/data/local/flog_dao.dart';
-import 'package:f_logs/model/datalog/data_log_type.dart';
-import 'package:f_logs/model/flog/flog.dart';
-import 'package:f_logs/model/flog/flog_config.dart';
-import 'package:f_logs/model/flog/log.dart';
-import 'package:f_logs/model/flog/log_level.dart';
-import 'package:f_logs/utils/filters/filters.dart';
-import 'package:f_logs/utils/formatter/formate_type.dart';
-import 'package:f_logs/utils/formatter/formatter.dart';
-import 'package:f_logs/utils/storage/logs_storage.dart';
-import 'package:f_logs/utils/timestamp/timestamp_format.dart';
+import 'package:f_logs/f_logs.dart';
 ```
 
 How to use
