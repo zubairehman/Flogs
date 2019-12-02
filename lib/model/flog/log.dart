@@ -27,6 +27,7 @@ class Log {
     this.stacktrace,
   });
 
+  /// Converts class to json
   Map<String, dynamic> toMap() {
     return {
       'className': className,
@@ -41,6 +42,7 @@ class Log {
     };
   }
 
+  /// create `Log` from json
   static Log fromMap(Map<String, dynamic> map) {
     return Log(
       className: map['className'],

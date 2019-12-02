@@ -13,18 +13,19 @@ class FlogDao {
   // Singleton instance
   static final FlogDao _singleton = FlogDao._();
 
-  // Singleton accessor
+  /// Singleton accessor
   static FlogDao get instance => _singleton;
 
   // A private constructor. Allows us to create instances of FlogDao
   // only from within the FlogDao class itself.
   FlogDao._();
 
-  // DB functions:--------------------------------------------------------------
+  /// DB functions:--------------------------------------------------------------
   Future<int> insert(Log log) async {
     return await _flogsStore.add(await _db, log.toMap());
   }
 
+  /// Updates the `log` in Database
   Future update(Log log) async {
     // For filtering by key (ID), RegEx, greater than, and many other criteria,
     // we use a Finder.
@@ -36,6 +37,7 @@ class FlogDao {
     );
   }
 
+  /// Deletes the `log` from Database
   Future delete(Log log) async {
     final finder = Finder(filter: Filter.byKey(log.id));
     await _flogsStore.delete(
@@ -44,24 +46,27 @@ class FlogDao {
     );
   }
 
+  /// Deletes all Logs from Database which match the given `filters`.
   Future<int> deleteAllLogsByFilter({List<Filter> filters}) async {
     final finder = Finder(
       filter: Filter.and(filters),
     );
 
-    int deleted = await _flogsStore.delete(
+    var deleted = await _flogsStore.delete(
       await _db,
       finder: finder,
     );
     return deleted;
   }
 
+  /// Deletes all Logs from Database
   Future deleteAll() async {
     await _flogsStore.delete(
       await _db,
     );
   }
 
+  /// Fetch all Logs which match the given `filters` and sorts them by `dataLogType`
   Future<List<Log>> getAllSortedByFilter({List<Filter> filters}) async {
     //creating finder
     final finder = Finder(
@@ -82,6 +87,7 @@ class FlogDao {
     }).toList();
   }
 
+  /// fetch all Logs from Database
   Future<List<Log>> getAllLogs() async {
     final recordSnapshots = await _flogsStore.find(
       await _db,

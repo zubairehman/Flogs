@@ -29,7 +29,7 @@ class FLog {
   /// @param methodName the method name
   /// @param text         the text
   /// @param type         the type
-  static logThis({
+  static void logThis({
     String className,
     String methodName,
     @required String text,
@@ -51,7 +51,7 @@ class FLog {
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static trace({
+  static void trace({
     String className,
     String methodName,
     @required String text,
@@ -69,7 +69,7 @@ class FLog {
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static debug({
+  static void debug({
     String className,
     String methodName,
     @required String text,
@@ -87,7 +87,7 @@ class FLog {
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static info({
+  static void info({
     String className,
     String methodName,
     @required String text,
@@ -105,7 +105,7 @@ class FLog {
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static warning({
+  static void warning({
     String className,
     String methodName,
     @required String text,
@@ -123,7 +123,7 @@ class FLog {
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static error({
+  static void error({
     String className,
     String methodName,
     @required String text,
@@ -141,7 +141,7 @@ class FLog {
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static severe({
+  static void severe({
     String className,
     String methodName,
     @required String text,
@@ -159,7 +159,7 @@ class FLog {
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
-  static fatal({
+  static void fatal({
     String className,
     String methodName,
     @required String text,
@@ -173,7 +173,7 @@ class FLog {
   /// printLogs
   ///
   /// This will return array of logs and print them as a string using StringBuffer()
-  static printLogs() async {
+  static void printLogs() async {
     print(Constants.PRINT_LOG_MSG);
 
     _getAllLogs().then((logs) {
@@ -194,12 +194,13 @@ class FLog {
   /// printDataLogs
   ///
   /// This will return array of logs grouped by dataType and print them as a string using StringBuffer()
-  static printDataLogs(
-      {List<String> dataLogsType,
-      List<String> logLevels,
-      int startTimeInMillis,
-      int endTimeInMillis,
-      FilterType filterType}) async {
+  static void printDataLogs({
+    List<String> dataLogsType,
+    List<String> logLevels,
+    int startTimeInMillis,
+    int endTimeInMillis,
+    FilterType filterType,
+  }) async {
     print(Constants.PRINT_DATA_LOG_MSG);
 
     _getAllSortedByFilter(
@@ -227,12 +228,10 @@ class FLog {
   /// printFileLogs
   ///
   /// This will print logs stored in a file as string using StringBuffer()
-  static printFileLogs() async {
+  static void printFileLogs() async {
     print(Constants.PRINT_LOG_MSG);
 
-    _storage.readLogsToFile().then((content) {
-      print(content);
-    });
+    _storage.readLogsToFile().then(print);
   }
 
   /// exportLogs
@@ -322,7 +321,7 @@ class FLog {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
-      int deleted = await _flogDao.deleteAllLogsByFilter(filters: filters);
+      var deleted = await _flogDao.deleteAllLogsByFilter(filters: filters);
       print("Deleted $deleted logs");
     } else {
       throw Exception(Constants.EXCEPTION_NOT_INIT);
@@ -332,7 +331,7 @@ class FLog {
   /// applyConfigurations
   ///
   /// This will apply user provided configurations to FLogs
-  static applyConfigurations(LogsConfig config) {
+  static void applyConfigurations(LogsConfig config) {
     _config = config;
 
     //check to see if encryption is enabled
@@ -382,7 +381,7 @@ class FLog {
     //if not then don't do anything
     if (_isLogsConfigValid()) {
       //creating log object
-      Log log = Log(
+      final log = Log(
         className: className,
         methodName: methodName,
         text: text,

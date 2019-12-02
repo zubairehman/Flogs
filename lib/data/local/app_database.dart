@@ -10,20 +10,20 @@ class AppDatabase {
   // Singleton instance
   static final AppDatabase _singleton = AppDatabase._();
 
-  // Singleton accessor
+  /// Singleton accessor
   static AppDatabase get instance => _singleton;
 
   // Completer is used for transforming synchronous code into asynchronous code.
   Completer<Database> _dbOpenCompleter;
 
-  // Key for encryption
-  var encryptionKey = "";
+  /// Key for encryption
+  String encryptionKey = "";
 
   // A private constructor. Allows us to create instances of AppDatabase
   // only from within the AppDatabase class itself.
   AppDatabase._();
 
-  // Database object accessor
+  /// Database object accessor
   Future<Database> get database async {
     // If completer is null, AppDatabaseClass is newly instantiated, so database is not yet opened
     if (_dbOpenCompleter == null) {
