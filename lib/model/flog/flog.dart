@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:f_logs/f_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -38,8 +40,7 @@ class FLog {
   }) async {
     // prevent to write LogLevel.ALL and LogLevel.OFF to db
     if (![LogLevel.OFF, LogLevel.ALL].contains(type)) {
-      _logThis(className, methodName, text, type, exception, dataLogType,
-          stacktrace);
+      _logThis(className, methodName, text, type, exception, dataLogType, stacktrace);
     }
   }
 
@@ -58,8 +59,7 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.TRACE, exception,
-        dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.TRACE, exception, dataLogType, stacktrace);
   }
 
   /// debug
@@ -77,8 +77,7 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.DEBUG, exception,
-        dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.DEBUG, exception, dataLogType, stacktrace);
   }
 
   /// info
@@ -96,8 +95,7 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType,
-        stacktrace);
+    _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType, stacktrace);
   }
 
   /// warning
@@ -115,8 +113,7 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.WARNING, exception,
-        dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.WARNING, exception, dataLogType, stacktrace);
   }
 
   /// error
@@ -134,8 +131,7 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.ERROR, exception,
-        dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.ERROR, exception, dataLogType, stacktrace);
   }
 
   /// severe
@@ -153,8 +149,7 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.SEVERE, exception,
-        dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.SEVERE, exception, dataLogType, stacktrace);
   }
 
   /// fatal
@@ -172,8 +167,7 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.FATAL, exception,
-        dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.FATAL, exception, dataLogType, stacktrace);
   }
 
   /// printLogs
@@ -244,21 +238,22 @@ class FLog {
   /// exportLogs
   ///
   /// This will export logs to external storage under FLog directory
-  static exportLogs() async {
+  static Future<File> exportLogs() async {
     var buffer = StringBuffer();
 
     print(Constants.PRINT_EXPORT_MSG);
 
     //get all logs and write to file
-    _getAllLogs().then((logs) {
-      logs.forEach((log) {
-        buffer.write(Formatter.format(log, _config));
-      });
+    final logs = await _getAllLogs();
 
-      _storage.writeLogsToFile(buffer.toString());
-      print(buffer.toString());
-      buffer.clear();
+    logs.forEach((log) {
+      buffer.write(Formatter.format(log, _config));
     });
+
+    final file = await _storage.writeLogsToFile(buffer.toString());
+    print(buffer.toString());
+    buffer.clear();
+    return file;
   }
 
   /// getAllLogs
@@ -302,8 +297,7 @@ class FLog {
   ///
   /// This will return the list of logs stored based on the custom filters provided
   /// by the user
-  static Future<List<Log>> getAllLogsByCustomFilter(
-      {List<Filter> filters}) async {
+  static Future<List<Log>> getAllLogsByCustomFilter({List<Filter> filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
@@ -316,15 +310,15 @@ class FLog {
   /// clearLogs
   ///
   /// This will clear all the logs stored in database
-  static clearLogs() {
-    _flogDao.deleteAll();
+  static Future<void> clearLogs() async {
+    await _flogDao.deleteAll();
     print("Logs Cleared!");
   }
 
   /// deleteAllLogsByFilter
   ///
   /// This will delete logs by provided filters
-  static deleteAllLogsByFilter({List<Filter> filters}) async {
+  static Future<void> deleteAllLogsByFilter({List<Filter> filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
@@ -367,14 +361,8 @@ class FLog {
   /// @param methodName the method name
   /// @param text         the text
   /// @param type         the type
-  static void _logThis(
-      String className,
-      String methodName,
-      String text,
-      LogLevel type,
-      Exception exception,
-      String dataLogType,
-      StackTrace stacktrace) {
+  static void _logThis(String className, String methodName, String text, LogLevel type, Exception exception,
+      String dataLogType, StackTrace stacktrace) {
     assert(text != null);
     assert(type != null);
 
@@ -448,8 +436,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       // skip write logs when log level is to low or
       // active log level is not in enabled log levels
-      if (LogLevel.values.indexOf(_config.activeLogLevel) <=
-              LogLevel.values.indexOf(log.logLevel) &&
+      if (LogLevel.values.indexOf(_config.activeLogLevel) <= LogLevel.values.indexOf(log.logLevel) &&
           _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
         await _flogDao.insert(log);
 
