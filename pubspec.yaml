@@ -13,15 +13,15 @@ dependencies:
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
 #  sembast: ^1.15.1
-  sembast: ^2.0.0+1
-  path_provider: ^1.1.0
+  sembast: ^2.1.1
+  path_provider: ^1.4.5
 
   # This package provides internationalization and localization facilities, including message
   # translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
-  intl: ^0.15.8
+  intl: ^0.16.0
 
   # A new flutter plugin for getting and requesting permission on Android.
-  permission_handler: ^3.0.1
+  permission_handler: ^4.0.0
 
   # XXTEA is a fast and secure encryption algorithm. This is a XXTEA library for Dart.
   xxtea: ^2.0.2
@@ -29,8 +29,8 @@ dependencies:
   # Tuple data structure
   # tuple: ^1.0.2
 
-  meta: ^1.1.6
-  path: ^1.6.2
+  meta: ^1.1.7
+  path: ^1.6.4
   stack_trace: ^1.9.3
 
 
