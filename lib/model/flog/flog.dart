@@ -265,7 +265,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllLogs();
     } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+      throw Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -289,7 +289,7 @@ class FLog {
               endTimeInMillis: endTimeInMillis,
               filterType: filterType));
     } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+      throw Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -303,7 +303,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllSortedByFilter(filters: filters);
     } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+      throw Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -325,7 +325,7 @@ class FLog {
       int deleted = await _flogDao.deleteAllLogsByFilter(filters: filters);
       print("Deleted $deleted logs");
     } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+      throw Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -339,7 +339,7 @@ class FLog {
     if (_config.encryptionEnabled) {
       //check to see if encryption key is provided
       if (_config.encryptionKey.isEmpty) {
-        throw new Exception(Constants.EXCEPTION_NULL_KEY);
+        throw Exception(Constants.EXCEPTION_NULL_KEY);
       }
     }
   }
@@ -397,7 +397,7 @@ class FLog {
       //writing it to DB
       _writeLogs(log);
     } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+      throw Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -410,7 +410,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllLogs();
     } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+      throw Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -423,7 +423,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       return await _flogDao.getAllSortedByFilter(filters: filters);
     } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+      throw Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
@@ -446,7 +446,7 @@ class FLog {
         }
       }
     } else {
-      throw new Exception(Constants.EXCEPTION_NOT_INIT);
+      throw Exception(Constants.EXCEPTION_NOT_INIT);
     }
   }
 
