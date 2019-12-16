@@ -18,7 +18,7 @@ dependencies:
 
   # This package provides internationalization and localization facilities, including message
   # translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
-  intl: ^0.15.8
+  intl: ^0.16.0
 
   # A new flutter plugin for getting and requesting permission on Android.
   permission_handler: ^3.0.1
