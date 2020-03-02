@@ -62,5 +62,8 @@ class LogsConfig {
 
   /// Timestamp format
   String timestampFormat =
-      TimestampFormat.TIME_FORMAT_READABLE; //Timestamp format
+      TimestampFormat.TIME_FORMAT_READABLE;
+
+  /// If true, print empty field if data is missing. fe. {field1} {field2} {} {null} {field5}
+  bool printEmpty = false;
 }
