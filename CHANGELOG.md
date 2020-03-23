@@ -65,6 +65,11 @@
 * Upgraded all the dependencies
 * upgraded example to support AndroidX
 
+## [1.3.0-alpha-01] - Mar 23, 2020
+
+* refactored main.dart
+* changed exception to dynamic in-order to handle both exception & error
+
 
 
 

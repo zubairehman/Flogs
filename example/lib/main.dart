@@ -188,13 +188,19 @@ class _HomePageState extends State<HomePage> {
 
   // general methods:-----------------------------------------------------------
   void logInfo() {
-    FLog.logThis(
-      className: "HomePage",
-      methodName: "_buildRow1",
-      text: "Log text/descritption goes here",
-      type: LogLevel.INFO,
-      dataLogType: DataLogType.DEVICE.toString(),
-    );
+//    FLog.logThis(
+//      className: "HomePage",
+//      methodName: "_buildRow1",
+//      text: "Log text/descritption goes here",
+//      type: LogLevel.INFO,
+//      dataLogType: DataLogType.DEVICE.toString(),
+//    );
+
+    final LogLevel _newLogLevel = null;
+    FLog.getDefaultConfigurations()..activeLogLevel = _newLogLevel;
+    FLog.info(
+        text:
+            'LogLevel set to: ${FLog.getDefaultConfigurations().activeLogLevel}');
   }
 
   void logException() {

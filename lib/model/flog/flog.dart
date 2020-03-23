@@ -448,7 +448,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       // skip write logs when log level is to low or
       // active log level is not in enabled log levels
-      if (LogLevel.values.indexOf(_config.activeLogLevel) <=
+      if (_config.activeLogLevel != null && LogLevel.values.indexOf(_config.activeLogLevel) <=
               LogLevel.values.indexOf(log.logLevel) &&
           _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
         await _flogDao.insert(log);
@@ -457,6 +457,8 @@ class FLog {
         if (_config.isDebuggable) {
           print(Formatter.format(log, _config));
         }
+      } else {
+        throw new Exception(Constants.EXCEPTION_NULL_LOGS_LEVEL);
       }
     } else {
       throw new Exception(Constants.EXCEPTION_NOT_INIT);
