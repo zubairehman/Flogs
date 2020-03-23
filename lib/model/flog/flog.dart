@@ -32,7 +32,7 @@ class FLog {
     String methodName,
     @required String text,
     @required LogLevel type,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -54,7 +54,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -73,7 +73,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -92,7 +92,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -111,7 +111,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -130,7 +130,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -149,7 +149,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -168,7 +168,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -372,7 +372,7 @@ class FLog {
       String methodName,
       String text,
       LogLevel type,
-      Exception exception,
+      dynamic exception,
       String dataLogType,
       StackTrace stacktrace) {
     assert(text != null);

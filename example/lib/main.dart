@@ -47,8 +47,8 @@ init() {
       FieldName.EXCEPTION,
       FieldName.STACKTRACE
     ]
-    ..customOpeningDivider = "|"
-    ..customClosingDivider = "|";
+    ..customOpeningDivider = "{"
+    ..customClosingDivider = "}";
 
   FLog.applyConfigurations(config);
 }
@@ -100,37 +100,11 @@ class _HomePageState extends State<HomePage> {
     return Row(
       children: <Widget>[
         _buildButton("Log Event", () {
-          for (int i = 0; i < 2; i++) {
-            if (i % 2 == 0) {
-              FLog.logThis(
-                className: "HomePage",
-                methodName: "_buildRow1",
-                text: "My log",
-                type: LogLevel.INFO,
-                dataLogType: DataLogType.DEVICE.toString(),
-              );
-            } else {
-              FLog.error(
-                text: "My log",
-                dataLogType: "Zubair",
-                className: "Home",
-                exception: Exception("This is a test"),
-              );
-            }
-            FLog.warning(
-              className: "HomePage",
-              methodName: "_buildRow1",
-              text: "My log",
-              dataLogType: "Umair",
-            );
-            // not logged because this LogLevel is lower then default INFO
-            FLog.trace(
-              className: "HomePage",
-              methodName: "_buildRow1",
-              text: "My log",
-              dataLogType: "Umair",
-            );
-          }
+          logInfo();
+          logException();
+          logError();
+          logWarning();
+          logTrace();
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Print Logs", () {
@@ -209,6 +183,63 @@ class _HomePageState extends State<HomePage> {
         textColor: Colors.white,
         color: Colors.blueAccent,
       ),
+    );
+  }
+
+  // general methods:-----------------------------------------------------------
+  void logInfo() {
+    FLog.logThis(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "Log text/descritption goes here",
+      type: LogLevel.INFO,
+      dataLogType: DataLogType.DEVICE.toString(),
+    );
+  }
+
+  void logException() {
+    try {
+      var result = 9 ~/ 0;
+      print(result);
+    } on Exception catch (exception) {
+      FLog.error(
+        text: "Exception text/descritption goes here",
+        dataLogType: "Exception (the type could be anything)",
+        className: "Home",
+        exception: exception,
+      );
+    }
+  }
+
+  void logError() {
+    try {
+      var string = "Zubair";
+      var index = string[-1];
+    } on Error catch (error) {
+      FLog.error(
+        text: "Error text/descritption goes here",
+        dataLogType: "Error (the type could be anything)",
+        className: "Home",
+        exception: error,
+      );
+    }
+  }
+
+  void logWarning() {
+    FLog.warning(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "Log text/descritption goes here",
+      dataLogType: "Warning (the type could be anything)",
+    );
+  }
+
+  void logTrace() {
+    FLog.trace(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "Log text/descritption goes here",
+      dataLogType: "Trace (the type could be anything)",
     );
   }
 
