@@ -39,5 +39,6 @@ class LogsConfig {
   var encryptionEnabled = false; //Encryption enabled
   var encryptionKey = ""; //Encryption Key
   var timestampFormat = TimestampFormat.TIME_FORMAT_READABLE; //Timestamp format
+  var millisecondsSinceEpochForTimestamp = false;
   var printEmpty = false; // If true, print empty field if data is missing. fe. {field1} {field2} {} {null} {field5}
 }

@@ -409,6 +409,7 @@ class FLog {
       methodName = Trace.current().frames[2].member.split(".")[1];
     }
 
+    DateTime now = DateTime.now();
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
@@ -420,8 +421,8 @@ class FLog {
         logLevel: type,
         dataLogType: dataLogType,
         exception: exception.toString(),
-        timestamp: DateTimeUtils.getCurrentTimestamp(_config),
-        timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
+        timestamp: DateTimeUtils.getCurrentTimestamp(now, _config),
+        timeInMillis: DateTimeUtils.getCurrentTimeInMillis(now),
         stacktrace: stacktraceString ?? stacktrace.toString(),
       );
 
