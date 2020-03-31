@@ -12,7 +12,7 @@ class DateTimeUtils {
 
   static String getCurrentTimestamp(DateTime now, LogsConfig config) {
     if (config.millisecondsSinceEpochForTimestamp)
-      now.millisecondsSinceEpoch.toString();
+      return now.millisecondsSinceEpoch.toString();
     return DateFormat(config.timestampFormat.toString()).format(now);
   }
 
