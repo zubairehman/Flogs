@@ -66,4 +66,7 @@ class LogsConfig {
 
   /// If true, print empty field if data is missing. fe. {field1} {field2} {} {null} {field5}
   bool printEmpty = false;
+
+  /// Display milliseconds since epoch for timestamp field
+  bool millisecondsSinceEpochForTimestamp = false;
 }
