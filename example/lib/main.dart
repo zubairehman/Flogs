@@ -60,7 +60,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //runtime permission
-  final PermissionGroup _permissionGroup = PermissionGroup.storage;
+  final Permission _permissionGroup = Permission.storage;
 
   @override
   void initState() {
@@ -250,9 +250,5 @@ class _HomePageState extends State<HomePage> {
   }
 
   //permission methods:---------------------------------------------------------
-  Future<void> requestPermission(PermissionGroup permission) async {
-    final List<PermissionGroup> permissions = <PermissionGroup>[permission];
-    final Map<PermissionGroup, PermissionStatus> permissionRequestResult =
-        await PermissionHandler().requestPermissions(permissions);
-  }
+  Future<void> requestPermission(Permission permission) => permission.request();
 }
