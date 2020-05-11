@@ -1,4 +1,4 @@
-import 'package:f_logs/f_logs.dart';
+import '../../f_logs.dart';
 
 class Log {
   // Id will be gotten from the database.
