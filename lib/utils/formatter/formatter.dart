@@ -26,7 +26,7 @@ class Formatter {
       output = _formatCurly(log, config.isDevelopmentDebuggingEnabled);
     }
 
-    return output + "\n";
+    return "$output\n";
   }
 
   static String _formatCurly(Log log, bool isDevelopmentDebuggingEnabled) {
@@ -101,7 +101,7 @@ class Formatter {
     bool isDevelopmentDebuggingEnabled,
     List<FieldName> fieldOrder,
   ) {
-    String output = "";
+    var output = "";
 
     if (log != null && fieldOrder.isNotEmpty) {
       fieldOrder.forEach((fieldName) {

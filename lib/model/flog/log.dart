@@ -1,4 +1,4 @@
-import 'package:f_logs/f_logs.dart';
+import '../../f_logs.dart';
 
 class Log {
   // Id will be gotten from the database.
@@ -27,7 +27,8 @@ class Log {
     this.stacktrace,
   });
 
-  Map<String, dynamic> toMap() {
+  /// Converts class to json
+  Map<String, dynamic> toJson() {
     return {
       'className': className,
       'methodName': methodName,
@@ -41,17 +42,18 @@ class Log {
     };
   }
 
-  static Log fromMap(Map<String, dynamic> map) {
+  /// create `Log` from json
+  static Log fromJson(Map<String, dynamic> json) {
     return Log(
-      className: map['className'],
-      methodName: map['methodName'],
-      text: map['text'],
-      timestamp: map['timestamp'],
-      timeInMillis: map['timeInMillis'],
-      exception: map['exception'],
-      dataLogType: map['dataLogType'],
-      logLevel: LogLevelConverter.fromStringToEnum(map['logLevel']),
-      stacktrace: map['stacktrace'],
+      className: json['className'],
+      methodName: json['methodName'],
+      text: json['text'],
+      timestamp: json['timestamp'],
+      timeInMillis: json['timeInMillis'],
+      exception: json['exception'],
+      dataLogType: json['dataLogType'],
+      logLevel: LogLevelConverter.fromStringToEnum(json['logLevel']),
+      stacktrace: json['stacktrace'],
     );
   }
 }
