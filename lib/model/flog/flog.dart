@@ -55,7 +55,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -91,7 +91,7 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
@@ -249,6 +249,7 @@ class FLog {
       buffer.write(Formatter.format(log, _config));
     });
 
+    // writing logs to file and returning file object
     final file = await _storage.writeLogsToFile(buffer.toString());
     print(buffer.toString());
     buffer.clear();
@@ -435,7 +436,7 @@ class FLog {
     if (_isLogsConfigValid()) {
       // skip write logs when log level is to low or
       // active log level is not in enabled log levels
-      if (LogLevel.values.indexOf(_config.activeLogLevel) <= LogLevel.values.indexOf(log.logLevel) &&
+      if (_config.activeLogLevel != null && LogLevel.values.indexOf(_config.activeLogLevel) <= LogLevel.values.indexOf(log.logLevel) &&
           _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
         await _flogDao.insert(log);
 
@@ -443,6 +444,8 @@ class FLog {
         if (_config.isDebuggable) {
           print(Formatter.format(log, _config));
         }
+      } else {
+        throw new Exception(Constants.EXCEPTION_NULL_LOGS_LEVEL);
       }
     } else {
       throw Exception(Constants.EXCEPTION_NOT_INIT);
