@@ -1,5 +1,6 @@
-import 'package:f_logs/f_logs.dart';
 import 'package:sembast/sembast.dart';
+
+import '../../f_logs.dart';
 
 class FlogDao {
   // A Store with int keys and Map<String, dynamic> values.
@@ -22,7 +23,7 @@ class FlogDao {
 
   /// DB functions:--------------------------------------------------------------
   Future<int> insert(Log log) async {
-    return await _flogsStore.add(await _db, log.toMap());
+    return await _flogsStore.add(await _db, log.toJson());
   }
 
   /// Updates the `log` in Database
@@ -32,7 +33,7 @@ class FlogDao {
     final finder = Finder(filter: Filter.byKey(log.id));
     await _flogsStore.update(
       await _db,
-      log.toMap(),
+      log.toJson(),
       finder: finder,
     );
   }
@@ -80,7 +81,7 @@ class FlogDao {
 
     // Making a List<Log> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {
-      final log = Log.fromMap(snapshot.value);
+      final log = Log.fromJson(snapshot.value);
       // An ID is a key of a record from the database.
       log.id = snapshot.key;
       return log;
@@ -95,7 +96,7 @@ class FlogDao {
 
     // Making a List<Log> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {
-      final log = Log.fromMap(snapshot.value);
+      final log = Log.fromJson(snapshot.value);
       // An ID is a key of a record from the database.
       log.id = snapshot.key;
       return log;
