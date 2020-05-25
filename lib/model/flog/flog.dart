@@ -23,7 +23,8 @@ class FLog {
   //Public Methods:-------------------------------------------------------------
   /// logThis
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -34,19 +35,21 @@ class FLog {
     String methodName,
     @required String text,
     @required LogLevel type,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
     // prevent to write LogLevel.ALL and LogLevel.OFF to db
     if (![LogLevel.OFF, LogLevel.ALL].contains(type)) {
-      _logThis(className, methodName, text, type, exception, dataLogType, stacktrace);
+      _logThis(className, methodName, text, type, exception, dataLogType,
+          stacktrace);
     }
   }
 
   /// trace
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -59,12 +62,14 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.TRACE, exception, dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.TRACE, exception,
+        dataLogType, stacktrace);
   }
 
   /// debug
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -73,16 +78,18 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.DEBUG, exception, dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.DEBUG, exception,
+        dataLogType, stacktrace);
   }
 
   /// info
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -95,12 +102,14 @@ class FLog {
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType,
+        stacktrace);
   }
 
   /// warning
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -109,16 +118,18 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.WARNING, exception, dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.WARNING, exception,
+        dataLogType, stacktrace);
   }
 
   /// error
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -127,16 +138,18 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.ERROR, exception, dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.ERROR, exception,
+        dataLogType, stacktrace);
   }
 
   /// severe
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -145,16 +158,18 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.SEVERE, exception, dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.SEVERE, exception,
+        dataLogType, stacktrace);
   }
 
   /// fatal
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
@@ -163,16 +178,18 @@ class FLog {
     String className,
     String methodName,
     @required String text,
-    Exception exception,
+    dynamic exception,
     String dataLogType,
     StackTrace stacktrace,
   }) async {
-    _logThis(className, methodName, text, LogLevel.FATAL, exception, dataLogType, stacktrace);
+    _logThis(className, methodName, text, LogLevel.FATAL, exception,
+        dataLogType, stacktrace);
   }
 
   /// printLogs
   ///
-  /// This will return array of logs and print them as a string using StringBuffer()
+  /// This will return array of logs and print them as a string using
+  /// StringBuffer()
   static void printLogs() async {
     print(Constants.PRINT_LOG_MSG);
 
@@ -193,7 +210,8 @@ class FLog {
 
   /// printDataLogs
   ///
-  /// This will return array of logs grouped by dataType and print them as a string using StringBuffer()
+  /// This will return array of logs grouped by dataType and print them as a
+  /// string using StringBuffer()
   static void printDataLogs({
     List<String> dataLogsType,
     List<String> logLevels,
@@ -295,9 +313,10 @@ class FLog {
 
   /// getAllLogsByCustomFilter
   ///
-  /// This will return the list of logs stored based on the custom filters provided
-  /// by the user
-  static Future<List<Log>> getAllLogsByCustomFilter({List<Filter> filters}) async {
+  /// This will return the list of logs stored based on the custom filters
+  /// provided by the user
+  static Future<List<Log>> getAllLogsByCustomFilter(
+      {List<Filter> filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
@@ -355,14 +374,21 @@ class FLog {
   //Private Methods:------------------------------------------------------------
   /// _logThis
   ///
-  /// Logs 'String' data along with class & function name to hourly based file with formatted timestamps.
+  /// Logs 'String' data along with class & function name to hourly based file
+  /// with formatted timestamps.
   ///
   /// @param className    the class name
   /// @param methodName the method name
   /// @param text         the text
   /// @param type         the type
-  static void _logThis(String className, String methodName, String text, LogLevel type, Exception exception,
-      String dataLogType, StackTrace stacktrace) {
+  static void _logThis(
+      String className,
+      String methodName,
+      String text,
+      LogLevel type,
+      dynamic exception,
+      String dataLogType,
+      StackTrace stacktrace) {
     assert(text != null);
     assert(type != null);
 
@@ -436,16 +462,20 @@ class FLog {
     if (_isLogsConfigValid()) {
       // skip write logs when log level is to low or
       // active log level is not in enabled log levels
-      if (_config.activeLogLevel != null && LogLevel.values.indexOf(_config.activeLogLevel) <= LogLevel.values.indexOf(log.logLevel) &&
-          _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
-        await _flogDao.insert(log);
+      if (_config.activeLogLevel != null) {
+        // skip write logs when log level is to low
+        if (LogLevel.values.indexOf(_config.activeLogLevel) <=
+                LogLevel.values.indexOf(log.logLevel) &&
+            _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
+          await _flogDao.insert(log);
 
-        //check to see if logcat debugging is enabled
-        if (_config.isDebuggable) {
-          print(Formatter.format(log, _config));
+          //check to see if logcat debugging is enabled
+          if (_config.isDebuggable) {
+            print(Formatter.format(log, _config));
+          }
         }
       } else {
-        throw new Exception(Constants.EXCEPTION_NULL_LOGS_LEVEL);
+        throw Exception(Constants.EXCEPTION_NULL_LOGS_LEVEL);
       }
     } else {
       throw Exception(Constants.EXCEPTION_NOT_INIT);
@@ -455,8 +485,7 @@ class FLog {
   /// _isLogsConfigValid
   ///
   /// This will check if user provided any configuration and logs are enabled
-  /// if yes, then it will return true
-  /// else it will return false
+  /// if yes, then it will return true else it will return false
   static _isLogsConfigValid() {
     return _config != null && _config.isLogsEnabled;
   }

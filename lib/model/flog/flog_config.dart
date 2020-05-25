@@ -61,5 +61,6 @@ class LogsConfig {
   String encryptionKey = "";
 
   /// Timestamp format
-  String timestampFormat = TimestampFormat.TIME_FORMAT_READABLE; //Timestamp format
+  String timestampFormat =
+      TimestampFormat.TIME_FORMAT_READABLE; //Timestamp format
 }

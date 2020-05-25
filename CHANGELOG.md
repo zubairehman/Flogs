@@ -70,6 +70,12 @@
 * refactored main.dart
 * changed exception to dynamic in-order to handle both exception & error
 
+## [1.3.0-alpha-02] - May 25, 2020
+
+* changed exception to dynamic in-order to handle both exception & error
+* added support for file export
+* refactored code
+
 
 
 
