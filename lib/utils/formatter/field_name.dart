@@ -1,4 +1,12 @@
-enum FieldName { CLASSNAME, METHOD_NAME, TEXT, EXCEPTION, LOG_LEVEL, TIMESTAMP, STACKTRACE }
+enum FieldName {
+  CLASSNAME,
+  METHOD_NAME,
+  TEXT,
+  EXCEPTION,
+  LOG_LEVEL,
+  TIMESTAMP,
+  STACKTRACE
+}
 
 /// Simple class which provide methods to convert `FieldName` to String and back
 class FieldNameConverter {

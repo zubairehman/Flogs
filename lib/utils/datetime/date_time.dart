@@ -19,7 +19,8 @@ class DateTimeUtils {
   static String getTimeInMillis(LogsConfig config) {
     final now = DateTime.now();
     var fiftyDaysFromNow = now.add(Duration(days: -1));
-    return DateFormat(config.timestampFormat.toString()).format(fiftyDaysFromNow);
+    return DateFormat(config.timestampFormat.toString())
+        .format(fiftyDaysFromNow);
   }
 
   static int getStartAndEndTimestamps({@required FilterType type}) {

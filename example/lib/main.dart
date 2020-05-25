@@ -196,11 +196,11 @@ class _HomePageState extends State<HomePage> {
 //      dataLogType: DataLogType.DEVICE.toString(),
 //    );
 
-    final LogLevel _newLogLevel = null;
-    FLog.getDefaultConfigurations()..activeLogLevel = _newLogLevel;
+//    final LogLevel _newLogLevel = null;
+//    FLog.getDefaultConfigurations()..activeLogLevel = _newLogLevel;
     FLog.info(
         text:
-            'LogLevel set to: ${FLog.getDefaultConfigurations().activeLogLevel}');
+            'LogLevel set to: ${FLog.getDefaultConfigurations().activeLogLevel}.');
   }
 
   void logException() {
