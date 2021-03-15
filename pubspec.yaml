@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
-  sembast: ^2.4.4+1
+  sembast: ^3.0.0+4
   path_provider: ^2.0.1
 
   # This package provides internationalization and localization facilities, including message
