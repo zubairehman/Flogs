@@ -231,7 +231,7 @@ class FLog {
         .then((logs) {
       var buffer = StringBuffer();
 
-      if (logs.length > 0) {
+      if (logs.isNotEmpty) {
         logs.forEach((log) {
           buffer.write(Formatter.format(log, _config));
         });
