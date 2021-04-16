@@ -355,7 +355,7 @@ class FLog {
     _config = config;
 
     //check to see if encryption is enabled
-    if (_config.encryptionEnabled) {
+    if (_config.encryption.isNotEmpty) {
       //check to see if encryption key is provided
       if (_config.encryptionKey.isEmpty) {
         throw Exception(Constants.EXCEPTION_NULL_KEY);

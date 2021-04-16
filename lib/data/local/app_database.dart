@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:f_logs/f_logs.dart';
+import 'package:f_logs/utils/encryption/gcm.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
@@ -48,11 +49,19 @@ class AppDatabase {
     // Check to see if encryption is set, then provide codec
     // else init normal db with path
     var database;
-    if (FLog.getDefaultConfigurations().encryptionEnabled &&
+    if (FLog.getDefaultConfigurations().encryption.isNotEmpty &&
         FLog.getDefaultConfigurations().encryptionKey.isNotEmpty) {
       // Initialize the encryption codec with a user password
-      var codec = getXXTeaSembastCodec(
-          password: FLog.getDefaultConfigurations().encryptionKey);
+      var codec;
+      if (FLog.getDefaultConfigurations().encryption == 'xxtea') {
+        codec = getXXTeaSembastCodec(
+            password: FLog.getDefaultConfigurations().encryptionKey);
+      } else if (FLog.getDefaultConfigurations().encryption == 'aes-gcm') {
+        codec = getGCMSembastCodec(
+            password: FLog.getDefaultConfigurations().encryptionKey);
+      } else {
+        throw 'Unsupported encryption';
+      }
 
       database = await databaseFactoryIo.openDatabase(dbPath, codec: codec);
     } else {

@@ -21,6 +21,8 @@ dependencies:
   # XXTEA is a fast and secure encryption algorithm. This is a XXTEA library for Dart.
   xxtea: ^2.0.3
 
+  pointycastle: ^3.0.1
+
   # Tuple data structure
   # tuple: ^1.0.2
 
