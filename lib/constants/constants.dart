@@ -27,10 +27,10 @@ class Constants {
   /// Print Log Messages
   static const PRINT_LOG_MSG =
       // ignore: lines_longer_than_80_chars
-      '\n--------------------------------------------------------------------------------------------\nPrinting Logs: This might take a while depending upon the size\n--------------------------------------------------------------------------------------------';
+      '\n--------------------------------------------------------------------------------------------\nPrinting Logs: This might take a while depending upon the size\n---------------------------------------------------------------------------------------------';
 
   /// Print Data Logs Messages
   static const PRINT_DATA_LOG_MSG =
       // ignore: lines_longer_than_80_chars
-      '\n--------------------------------------------------------------------------------------------\nPrinting Data Logs: This might take a while depending upon the size\n--------------------------------------------------------------------------------------------';
+      '\n--------------------------------------------------------------------------------------------\nPrinting Data Logs: This might take a while depending upon the size\n----------------------------------------------------------------------------------------';
 }

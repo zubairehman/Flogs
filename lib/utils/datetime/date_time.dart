@@ -23,8 +23,8 @@ class DateTimeUtils {
         .format(fiftyDaysFromNow);
   }
 
-  static int getStartAndEndTimestamps({@required FilterType type}) {
-    int startTimeInMillis;
+  static int? getStartAndEndTimestamps({required FilterType type}) {
+    int? startTimeInMillis;
 
     //filter types
     const lastHour = "FilterType.LAST_HOUR";

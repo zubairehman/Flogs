@@ -5,11 +5,11 @@ class Filters {
   Filters._();
 
   static List<Filter> generateFilters({
-    List<String> dataLogsType,
-    List<String> logLevels,
-    int startTimeInMillis,
-    int endTimeInMillis,
-    FilterType filterType,
+    List<String>? dataLogsType,
+    List<String>? logLevels,
+    int? startTimeInMillis,
+    int? endTimeInMillis,
+    FilterType? filterType,
   }) {
     //creating list of filters
     var filters = <Filter>[];

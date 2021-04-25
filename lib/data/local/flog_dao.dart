@@ -1,10 +1,15 @@
+import 'dart:async';
+
+import 'package:f_logs/f_logs.dart';
 import 'package:sembast/sembast.dart';
 
-import '../../f_logs.dart';
+import 'app_database.dart';
+
 
 class FlogDao {
   // A Store with int keys and Map<String, dynamic> values.
-  // This Store acts like a persistent map, values of which are Flogs objects converted to Map
+  // This Store acts like a persistent map, values of which are Flogs objects
+  // converted to Map
   final _flogsStore = intMapStoreFactory.store(DBConstants.FLOG_STORE_NAME);
 
   // Private getter to shorten the amount of code needed to get the
@@ -48,7 +53,7 @@ class FlogDao {
   }
 
   /// Deletes all Logs from Database which match the given `filters`.
-  Future<int> deleteAllLogsByFilter({List<Filter> filters}) async {
+  Future<int> deleteAllLogsByFilter({required List<Filter> filters}) async {
     final finder = Finder(
       filter: Filter.and(filters),
     );
@@ -68,16 +73,16 @@ class FlogDao {
   }
 
   /// Fetch all Logs which match the given `filters` and sorts them by `dataLogType`
-  Future<List<Log>> getAllSortedByFilter({List<Filter> filters}) async {
+  Future<List<Log>> getAllSortedByFilter({required List<Filter> filters}) async {
     //creating finder
     final finder = Finder(
         filter: Filter.and(filters),
         sortOrders: [SortOrder(DBConstants.FIELD_DATA_LOG_TYPE)]);
 
-    final recordSnapshots = await _flogsStore.find(
+    final recordSnapshots = await (_flogsStore.find(
       await _db,
       finder: finder,
-    );
+    ) as FutureOr<List<RecordSnapshot<int, Map<String, Object>>>>);
 
     // Making a List<Log> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {
@@ -90,9 +95,9 @@ class FlogDao {
 
   /// fetch all Logs from Database
   Future<List<Log>> getAllLogs() async {
-    final recordSnapshots = await _flogsStore.find(
+    final recordSnapshots = await (_flogsStore.find(
       await _db,
-    );
+    ) as FutureOr<List<RecordSnapshot<int, Map<String, Object>>>>);
 
     // Making a List<Log> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {

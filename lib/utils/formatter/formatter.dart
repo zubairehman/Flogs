@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class Formatter {
   static String format(Log log, LogsConfig config) {
-    String output;
+    String? output;
 
     if (config.formatType.toString() == FormatType.FORMAT_CURLY.toString()) {
       output = _formatCurly(log, config.isDevelopmentDebuggingEnabled);
@@ -29,8 +29,8 @@ class Formatter {
     return "$output\n";
   }
 
-  static String _formatCurly(Log log, bool isDevelopmentDebuggingEnabled) {
-    String output;
+  static String? _formatCurly(Log log, bool isDevelopmentDebuggingEnabled) {
+    String? output;
 
     if (log != null) {
       output = "{${log.className}} ";
@@ -50,8 +50,8 @@ class Formatter {
     return output;
   }
 
-  static String _formatSquare(Log log, bool isDevelopmentDebuggingEnabled) {
-    String output;
+  static String? _formatSquare(Log log, bool isDevelopmentDebuggingEnabled) {
+    String? output;
 
     if (log != null) {
       output = "[${log.className}] ";
@@ -71,9 +71,9 @@ class Formatter {
     return output;
   }
 
-  static String _formatCsv(
+  static String? _formatCsv(
       Log log, String deliminator, bool isDevelopmentDebuggingEnabled) {
-    String output;
+    String? output;
 
     if (log != null) {
       output = "${log.className}$deliminator ";
