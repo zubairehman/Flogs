@@ -32,19 +32,17 @@ class Formatter {
   static String? _formatCurly(Log log, bool isDevelopmentDebuggingEnabled) {
     String? output;
 
-    if (log != null) {
-      output = "{${log.className}} ";
-      output += "{${log.methodName}} ";
-      output += "{${log.text}} ";
-      output += log.exception != 'null' ? "{${log.exception}} " : "";
-      output += "{${log.logLevel.toString()}} ";
-      output += "{${log.timestamp}} ";
-      output += log.stacktrace != 'null' ? "{${log.stacktrace}} " : "";
+    output = "{${log.className}} ";
+    output += "{${log.methodName}} ";
+    output += "{${log.text}} ";
+    output += log.exception != 'null' ? "{${log.exception}} " : "";
+    output += "{${log.logLevel.toString()}} ";
+    output += "{${log.timestamp}} ";
+    output += log.stacktrace != 'null' ? "{${log.stacktrace}} " : "";
 
-      if (isDevelopmentDebuggingEnabled) {
-        output += !kReleaseMode ? "{${log.dataLogType}} " : "";
-        output += !kReleaseMode ? "{${log.timeInMillis}}" : "";
-      }
+    if (isDevelopmentDebuggingEnabled) {
+      output += !kReleaseMode ? "{${log.dataLogType}} " : "";
+      output += !kReleaseMode ? "{${log.timeInMillis}}" : "";
     }
 
     return output;
@@ -53,19 +51,17 @@ class Formatter {
   static String? _formatSquare(Log log, bool isDevelopmentDebuggingEnabled) {
     String? output;
 
-    if (log != null) {
-      output = "[${log.className}] ";
-      output += "[${log.methodName}] ";
-      output += "[${log.text}] ";
-      output += log.exception != 'null' ? "[${log.exception}] " : "";
-      output += "[${log.logLevel.toString()}] ";
-      output += "[${log.timestamp}] ";
-      output += log.stacktrace != 'null' ? "[${log.stacktrace}] " : "";
+    output = "[${log.className}] ";
+    output += "[${log.methodName}] ";
+    output += "[${log.text}] ";
+    output += log.exception != 'null' ? "[${log.exception}] " : "";
+    output += "[${log.logLevel.toString()}] ";
+    output += "[${log.timestamp}] ";
+    output += log.stacktrace != 'null' ? "[${log.stacktrace}] " : "";
 
-      if (isDevelopmentDebuggingEnabled) {
-        output += !kReleaseMode ? "[${log.dataLogType}] " : "";
-        output += !kReleaseMode ? "[${log.timeInMillis}]" : "";
-      }
+    if (isDevelopmentDebuggingEnabled) {
+      output += !kReleaseMode ? "[${log.dataLogType}] " : "";
+      output += !kReleaseMode ? "[${log.timeInMillis}]" : "";
     }
 
     return output;
@@ -75,20 +71,18 @@ class Formatter {
       Log log, String deliminator, bool isDevelopmentDebuggingEnabled) {
     String? output;
 
-    if (log != null) {
-      output = "${log.className}$deliminator ";
-      output += "${log.methodName}$deliminator ";
-      output += "${log.text}$deliminator ";
-      output += log.exception != 'null' ? "${log.exception}$deliminator " : "";
-      output += "${log.logLevel.toString()}$deliminator ";
-      output += "${log.timestamp} ";
-      output +=
-          log.stacktrace != 'null' ? "${log.stacktrace}$deliminator " : "";
+    output = "${log.className}$deliminator ";
+    output += "${log.methodName}$deliminator ";
+    output += "${log.text}$deliminator ";
+    output += log.exception != 'null' ? "${log.exception}$deliminator " : "";
+    output += "${log.logLevel.toString()}$deliminator ";
+    output += "${log.timestamp} ";
+    output +=
+        log.stacktrace != 'null' ? "${log.stacktrace}$deliminator " : "";
 
-      if (isDevelopmentDebuggingEnabled) {
-        output += !kReleaseMode ? "${log.dataLogType} " : "";
-        output += !kReleaseMode ? "${log.timeInMillis}" : "";
-      }
+    if (isDevelopmentDebuggingEnabled) {
+      output += !kReleaseMode ? "${log.dataLogType} " : "";
+      output += !kReleaseMode ? "${log.timeInMillis}" : "";
     }
 
     return output;
@@ -103,7 +97,7 @@ class Formatter {
   ) {
     var output = "";
 
-    if (log != null && fieldOrder.isNotEmpty) {
+    if (fieldOrder.isNotEmpty) {
       fieldOrder.forEach((fieldName) {
         if (fieldName == FieldName.CLASSNAME) {
           output += "$openingDivider${log.className}$closingDivider ";
