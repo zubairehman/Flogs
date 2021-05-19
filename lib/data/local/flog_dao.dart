@@ -5,7 +5,6 @@ import 'package:sembast/sembast.dart';
 
 import 'app_database.dart';
 
-
 class FlogDao {
   // A Store with int keys and Map<String, dynamic> values.
   // This Store acts like a persistent map, values of which are Flogs objects
@@ -73,7 +72,8 @@ class FlogDao {
   }
 
   /// Fetch all Logs which match the given `filters` and sorts them by `dataLogType`
-  Future<List<Log>> getAllSortedByFilter({required List<Filter> filters}) async {
+  Future<List<Log>> getAllSortedByFilter(
+      {required List<Filter> filters}) async {
     //creating finder
     final finder = Finder(
         filter: Filter.and(filters),
@@ -82,7 +82,7 @@ class FlogDao {
     final recordSnapshots = await (_flogsStore.find(
       await _db,
       finder: finder,
-    ) as FutureOr<List<RecordSnapshot<int, Map<String, Object>>>>);
+    ));
 
     // Making a List<Log> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {
@@ -97,7 +97,7 @@ class FlogDao {
   Future<List<Log>> getAllLogs() async {
     final recordSnapshots = await (_flogsStore.find(
       await _db,
-    ) as FutureOr<List<RecordSnapshot<int, Map<String, Object>>>>);
+    ));
 
     // Making a List<Log> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {
