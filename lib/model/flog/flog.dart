@@ -36,13 +36,11 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
-    String? stacktraceString,
   }) async {
     // prevent to write LogLevel.ALL and LogLevel.OFF to db
     if (![LogLevel.OFF, LogLevel.ALL].contains(type)) {
-      _logThis(
-          className, methodName, text, type, exception, dataLogType, stacktrace,
-          stacktraceString: stacktraceString);
+      _logThis(className, methodName, text, type, exception, dataLogType,
+          stacktrace);
     }
   }
 
@@ -61,11 +59,9 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
-    String? stacktraceString,
   }) async {
     _logThis(className, methodName, text, LogLevel.TRACE, exception,
-        dataLogType, stacktrace,
-        stacktraceString: stacktraceString);
+        dataLogType, stacktrace);
   }
 
   /// debug
@@ -83,11 +79,9 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
-    String? stacktraceString,
   }) async {
     _logThis(className, methodName, text, LogLevel.DEBUG, exception,
-        dataLogType, stacktrace,
-        stacktraceString: stacktraceString);
+        dataLogType, stacktrace);
   }
 
   /// info
@@ -105,11 +99,9 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
-    String? stacktraceString,
   }) async {
     _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType,
-        stacktrace,
-        stacktraceString: stacktraceString);
+        stacktrace);
   }
 
   /// warning
@@ -127,11 +119,9 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
-    String? stacktraceString,
   }) async {
     _logThis(className, methodName, text, LogLevel.WARNING, exception,
-        dataLogType, stacktrace,
-        stacktraceString: stacktraceString);
+        dataLogType, stacktrace);
   }
 
   /// error
@@ -149,11 +139,9 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
-    String? stacktraceString,
   }) async {
     _logThis(className, methodName, text, LogLevel.ERROR, exception,
-        dataLogType, stacktrace,
-        stacktraceString: stacktraceString);
+        dataLogType, stacktrace);
   }
 
   /// severe
@@ -171,11 +159,9 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
-    String? stacktraceString,
   }) async {
     _logThis(className, methodName, text, LogLevel.SEVERE, exception,
-        dataLogType, stacktrace,
-        stacktraceString: stacktraceString);
+        dataLogType, stacktrace);
   }
 
   /// fatal
@@ -193,11 +179,9 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
-    String? stacktraceString,
   }) async {
     _logThis(className, methodName, text, LogLevel.FATAL, exception,
-        dataLogType, stacktrace,
-        stacktraceString: stacktraceString);
+        dataLogType, stacktrace);
   }
 
   /// printLogs
@@ -394,17 +378,15 @@ class FLog {
   /// @param methodName the method name
   /// @param text         the text
   /// @param type         the type
-  /// @param stacktraceString optional stacktrace string. If not null, it will
-  /// override string from stacktrace.toString().
   static void _logThis(
-      String? className,
-      String? methodName,
-      String text,
-      LogLevel type,
-      dynamic exception,
-      String? dataLogType,
-      StackTrace? stacktrace,
-      {String? stacktraceString}) {
+    String? className,
+    String? methodName,
+    String text,
+    LogLevel type,
+    dynamic exception,
+    String? dataLogType,
+    StackTrace? stacktrace,
+  ) {
     //check to see if className is not provided
     //then its already been taken from calling class
     if (className == null) {
@@ -421,17 +403,32 @@ class FLog {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
+      final String cnString =
+          _config.removeNewLines ? className.replaceAll("\n", "") : className;
+      final String mnString =
+          _config.removeNewLines ? methodName.replaceAll("\n", "") : methodName;
+      final String txtString =
+          _config.removeNewLines ? text.replaceAll("\n", "") : text;
+      final String? dltString = _config.removeNewLines
+          ? dataLogType?.replaceAll("\n", "")
+          : dataLogType;
+      final String exString = _config.removeNewLines
+          ? exception.toString().replaceAll("\n", "")
+          : exception.toString();
+      final String stString = _config.removeNewLines
+          ? stacktrace.toString().replaceAll("\n", "")
+          : stacktrace.toString();
       //creating log object
       final log = Log(
-        className: className,
-        methodName: methodName,
-        text: text,
+        className: cnString,
+        methodName: mnString,
+        text: txtString,
         logLevel: type,
-        dataLogType: dataLogType,
-        exception: exception.toString(),
+        dataLogType: dltString,
+        exception: exString,
         timestamp: DateTimeUtils.getCurrentTimestamp(now, _config),
         timeInMillis: DateTimeUtils.getCurrentTimeInMillis(now),
-        stacktrace: stacktraceString ?? stacktrace.toString(),
+        stacktrace: stString,
       );
 
       //writing it to DB
