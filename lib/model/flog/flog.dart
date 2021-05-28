@@ -498,6 +498,6 @@ class FLog {
   /// This will check if user provided any configuration and logs are enabled
   /// if yes, then it will return true else it will return false
   static _isLogsConfigValid() {
-    return _config != null && _config.isLogsEnabled;
+    return _config.isLogsEnabled;
   }
 }
