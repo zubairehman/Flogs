@@ -68,3 +68,10 @@
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+# FVM during tests
+.fvm
+.vscode/settings.json
+packages/cli/test/.test_coverage.dart
+packages/cli/.env
+.env

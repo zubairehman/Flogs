@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class Formatter {
   static String format(Log log, LogsConfig config) {
-    String output;
+    String? output;
 
     if (config.formatType.toString() == FormatType.FORMAT_CURLY.toString()) {
       output = _formatCurly(
@@ -33,87 +33,60 @@ class Formatter {
     return "$output\n";
   }
 
-  static String _formatCurly(
-      Log log, bool isDevelopmentDebuggingEnabled, bool printEmpty) {
-    String output;
+  static String? _formatCurly(Log log, bool isDevelopmentDebuggingEnabled, bool printEmpty) {
+    String? output;
 
-    if (log != null) {
-      output = "{${log.className}} ";
-      output += "{${log.methodName}} ";
-      output += "{${log.text}} ";
-      output += log.exception != 'null'
-          ? "{${log.exception}} "
-          : printEmpty ? "{} " : "";
-      output += "{${log.logLevel.toString()}} ";
-      output += "{${log.timestamp}} ";
-      output += log.stacktrace != 'null'
-          ? "{${log.stacktrace}} "
-          : printEmpty ? "{} " : "";
+    output = "{${log.className}} ";
+    output += "{${log.methodName}} ";
+    output += "{${log.text}} ";
+    output += log.exception != 'null' ? "{${log.exception}} " : printEmpty ? "{} " : "";
+    output += "{${log.logLevel.toString()}} ";
+    output += "{${log.timestamp}} ";
+    output += log.stacktrace != 'null' ? "{${log.stacktrace}} " : printEmpty ? "{} " : "";
 
-      if (isDevelopmentDebuggingEnabled) {
-        output +=
-            !kReleaseMode ? "{${log.dataLogType}} " : printEmpty ? "{} " : "";
-        output +=
-            !kReleaseMode ? "{${log.timeInMillis}}" : printEmpty ? "{} " : "";
-      }
+    if (isDevelopmentDebuggingEnabled) {
+      output += !kReleaseMode ? "{${log.dataLogType}} " : printEmpty ? "{} " : "";
+      output += !kReleaseMode ? "{${log.timeInMillis}}" : printEmpty ? "{} " : "";
     }
 
     return output;
   }
 
-  static String _formatSquare(
-      Log log, bool isDevelopmentDebuggingEnabled, bool printEmpty) {
-    String output;
+  static String? _formatSquare(Log log, bool isDevelopmentDebuggingEnabled, bool printEmpty) {
+    String? output;
 
-    if (log != null) {
-      output = "[${log.className}] ";
-      output += "[${log.methodName}] ";
-      output += "[${log.text}] ";
-      output += log.exception != 'null'
-          ? "[${log.exception}] "
-          : printEmpty ? "[] " : "";
-      output += "[${log.logLevel.toString()}] ";
-      output += "[${log.timestamp}] ";
-      output += log.stacktrace != 'null'
-          ? "[${log.stacktrace}] "
-          : printEmpty ? "[] " : "";
+    output = "[${log.className}] ";
+    output += "[${log.methodName}] ";
+    output += "[${log.text}] ";
+    output += log.exception != 'null' ? "[${log.exception}] " : printEmpty ? "[] " : "";
+    output += "[${log.logLevel.toString()}] ";
+    output += "[${log.timestamp}] ";
+    output += log.stacktrace != 'null' ? "[${log.stacktrace}] " : printEmpty ? "[] " : "";
 
-      if (isDevelopmentDebuggingEnabled) {
-        output +=
-            !kReleaseMode ? "[${log.dataLogType}] " : printEmpty ? "[] " : "";
-        output +=
-            !kReleaseMode ? "[${log.timeInMillis}]" : printEmpty ? "[] " : "";
-      }
+    if (isDevelopmentDebuggingEnabled) {
+      output += !kReleaseMode ? "[${log.dataLogType}] " : printEmpty ? "[] " : "";
+      output += !kReleaseMode ? "[${log.timeInMillis}]" : printEmpty ? "[] " : "";
     }
 
     return output;
   }
 
-  static String _formatCsv(Log log, String deliminator,
-      bool isDevelopmentDebuggingEnabled, bool printEmpty) {
-    String output;
+  static String? _formatCsv(
+      Log log, String deliminator, bool isDevelopmentDebuggingEnabled, bool printEmpty) {
+    String? output;
 
-    if (log != null) {
-      output = "${log.className}$deliminator ";
-      output += "${log.methodName}$deliminator ";
-      output += "${log.text}$deliminator ";
-      output += log.exception != 'null'
-          ? "${log.exception}$deliminator "
-          : printEmpty ? "$deliminator " : "";
-      output += "${log.logLevel.toString()}$deliminator ";
-      output += "${log.timestamp} ";
-      output += log.stacktrace != 'null'
-          ? "${log.stacktrace}$deliminator "
-          : printEmpty ? "$deliminator " : "";
+    output = "${log.className}$deliminator ";
+    output += "${log.methodName}$deliminator ";
+    output += "${log.text}$deliminator ";
+    output += log.exception != 'null' ? "${log.exception}$deliminator " : printEmpty ? "$deliminator " : "";
+    output += "${log.logLevel.toString()}$deliminator ";
+    output += "${log.timestamp} ";
+    output +=
+        log.stacktrace != 'null' ? "${log.stacktrace}$deliminator " : printEmpty ? "$deliminator " : "";
 
-      if (isDevelopmentDebuggingEnabled) {
-        output += !kReleaseMode
-            ? "${log.dataLogType} "
-            : printEmpty ? "$deliminator " : "";
-        output += !kReleaseMode
-            ? "${log.timeInMillis}"
-            : printEmpty ? "$deliminator " : "";
-      }
+    if (isDevelopmentDebuggingEnabled) {
+      output += !kReleaseMode ? "${log.dataLogType} " : printEmpty ? "$deliminator " : "";
+      output += !kReleaseMode ? "${log.timeInMillis}" : printEmpty ? "$deliminator " : "";
     }
 
     return output;
@@ -129,7 +102,7 @@ class Formatter {
   ) {
     String output = "";
 
-    if (log != null && fieldOrder.isNotEmpty) {
+    if (fieldOrder.isNotEmpty) {
       fieldOrder.forEach((fieldName) {
         if (fieldName == FieldName.CLASSNAME) {
           output += "$openingDivider${log.className}$closingDivider ";

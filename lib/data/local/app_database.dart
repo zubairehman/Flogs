@@ -14,7 +14,7 @@ class AppDatabase {
   static AppDatabase get instance => _singleton;
 
   // Completer is used for transforming synchronous code into asynchronous code.
-  Completer<Database> _dbOpenCompleter;
+  Completer<Database>? _dbOpenCompleter;
 
   /// Key for encryption
   String encryptionKey = "";
@@ -35,7 +35,7 @@ class AppDatabase {
     // If the database is already opened, awaiting the future will happen instantly.
     // Otherwise, awaiting the returned future will take some time - until complete() is called
     // on the Completer in _openDatabase() below.
-    return _dbOpenCompleter.future;
+    return _dbOpenCompleter!.future;
   }
 
   Future _openDatabase() async {
@@ -60,6 +60,6 @@ class AppDatabase {
     }
 
     // Any code awaiting the Completer's future will now start executing
-    _dbOpenCompleter.complete(database);
+    _dbOpenCompleter!.complete(database);
   }
 }

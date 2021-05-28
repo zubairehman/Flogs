@@ -8,33 +8,33 @@ class DBConstants {
   static const DB_NAME = 'flog.db';
 
   // Fields
-  /// Fieldname of id
+  /// Field name of id
   static const FIELD_ID = 'id';
 
-  /// Fieldname of className
+  /// Field name of className
   static const FIELD_CLASSNAME = 'className';
 
-  /// Fieldname of methodName
+  /// Field name of methodName
   static const FIELD_METHOD_NAME = 'methodName';
 
-  /// Fieldname of text
+  /// Field name of text
   static const FIELD_TEXT = 'text';
 
-  /// Fieldname of timestamp
+  /// Field name of timestamp
   static const FIELD_TIMESTAMP = 'timestamp';
 
-  /// Fieldname of exception
+  /// Field name of exception
   static const FIELD_EXCEPTION = 'exception';
 
-  /// Fieldname of dataLogType
+  /// Field name of dataLogType
   static const FIELD_DATA_LOG_TYPE = 'dataLogType';
 
-  /// Fieldname of timeInMillis
+  /// Field name of timeInMillis
   static const FIELD_TIME_IN_MILLIS = 'timeInMillis';
 
-  /// Fieldname of logLevel
+  /// Field name of logLevel
   static const FIELD_LOG_LEVEL = 'logLevel';
 
-  /// Fieldname of stacktrace
+  /// Field name of stacktrace
   static const FIELD_STACKTRACE = 'stacktrace';
 }

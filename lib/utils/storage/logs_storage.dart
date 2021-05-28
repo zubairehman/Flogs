@@ -14,7 +14,7 @@ class LogsStorage {
   LogsStorage._();
 
   // Filing methods:------------------------------------------------------------
-  Future<String> get _localPath async {
+  Future<String?> get _localPath async {
     var directory;
 
     if (Platform.isIOS) {

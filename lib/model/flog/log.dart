@@ -3,17 +3,17 @@ import '../../f_logs.dart';
 class Log {
   // Id will be gotten from the database.
   // It's automatically generated & unique for every stored Log.
-  int id;
+  int? id;
 
-  String className;
-  String methodName;
-  String text;
-  String timestamp;
-  String exception;
-  String dataLogType;
-  int timeInMillis;
-  LogLevel logLevel;
-  String stacktrace;
+  String? className;
+  String? methodName;
+  String? text;
+  String? timestamp;
+  String? exception;
+  String? dataLogType;
+  int? timeInMillis;
+  LogLevel? logLevel;
+  String? stacktrace;
 
   Log({
     this.className,
