@@ -5,21 +5,14 @@ class DateTimeUtils {
   DateTimeUtils._();
 
   //DateTime Methods:-----------------------------------------------------------
-  static int getCurrentTimeInMillis() {
-    final now = DateTime.now();
+  static int getCurrentTimeInMillis(DateTime now) {
     return now.millisecondsSinceEpoch;
   }
 
-  static String getCurrentTimestamp(LogsConfig config) {
-    final now = DateTime.now();
+  static String getCurrentTimestamp(DateTime now, LogsConfig config) {
+    if (config.millisecondsSinceEpochForTimestamp)
+      return now.millisecondsSinceEpoch.toString();
     return DateFormat(config.timestampFormat.toString()).format(now);
-  }
-
-  static String getTimeInMillis(LogsConfig config) {
-    final now = DateTime.now();
-    var fiftyDaysFromNow = now.add(Duration(days: -1));
-    return DateFormat(config.timestampFormat.toString())
-        .format(fiftyDaysFromNow);
   }
 
   static int? getStartAndEndTimestamps({required FilterType type}) {

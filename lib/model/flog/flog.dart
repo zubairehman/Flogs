@@ -365,7 +365,6 @@ class FLog {
   ///
   /// Returns the default configuration
   static LogsConfig getDefaultConfigurations() {
-    assert(_config != null);
     return _config;
   }
 
@@ -380,16 +379,14 @@ class FLog {
   /// @param text         the text
   /// @param type         the type
   static void _logThis(
-      String? className,
-      String? methodName,
-      String text,
-      LogLevel type,
-      dynamic exception,
-      String? dataLogType,
-      StackTrace? stacktrace) {
-    assert(text != null);
-    assert(type != null);
-
+    String? className,
+    String? methodName,
+    String text,
+    LogLevel type,
+    dynamic exception,
+    String? dataLogType,
+    StackTrace? stacktrace,
+  ) {
     //check to see if className is not provided
     //then its already been taken from calling class
     if (className == null) {
@@ -402,20 +399,36 @@ class FLog {
       methodName = Trace.current().frames[2].member!.split(".")[1];
     }
 
+    DateTime now = DateTime.now();
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
+      final String cnString =
+          _config.removeNewLines ? className.replaceAll("\n", "") : className;
+      final String mnString =
+          _config.removeNewLines ? methodName.replaceAll("\n", "") : methodName;
+      final String txtString =
+          _config.removeNewLines ? text.replaceAll("\n", "") : text;
+      final String? dltString = _config.removeNewLines
+          ? dataLogType?.replaceAll("\n", "")
+          : dataLogType;
+      final String exString = _config.removeNewLines
+          ? exception.toString().replaceAll("\n", "")
+          : exception.toString();
+      final String stString = _config.removeNewLines
+          ? stacktrace.toString().replaceAll("\n", "")
+          : stacktrace.toString();
       //creating log object
       final log = Log(
-        className: className,
-        methodName: methodName,
-        text: text,
+        className: cnString,
+        methodName: mnString,
+        text: txtString,
         logLevel: type,
-        dataLogType: dataLogType,
-        exception: exception.toString(),
-        timestamp: DateTimeUtils.getCurrentTimestamp(_config),
-        timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
-        stacktrace: stacktrace.toString(),
+        dataLogType: dltString,
+        exception: exString,
+        timestamp: DateTimeUtils.getCurrentTimestamp(now, _config),
+        timeInMillis: DateTimeUtils.getCurrentTimeInMillis(now),
+        stacktrace: stString,
       );
 
       //writing it to DB
@@ -441,7 +454,8 @@ class FLog {
   /// _getAllSortedByFilter
   ///
   /// This will return the list of logs sorted by provided filters
-  static Future<List<Log>> _getAllSortedByFilter({List<Filter>? filters}) async {
+  static Future<List<Log>> _getAllSortedByFilter(
+      {List<Filter>? filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
@@ -460,20 +474,16 @@ class FLog {
     if (_isLogsConfigValid()) {
       // skip write logs when log level is to low or
       // active log level is not in enabled log levels
-      if (_config.activeLogLevel != null) {
-        // skip write logs when log level is to low
-        if (LogLevel.values.indexOf(_config.activeLogLevel) <=
-                LogLevel.values.indexOf(log.logLevel!) &&
-            _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
-          await _flogDao.insert(log);
+      // skip write logs when log level is to low
+      if (LogLevel.values.indexOf(_config.activeLogLevel) <=
+              LogLevel.values.indexOf(log.logLevel!) &&
+          _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
+        await _flogDao.insert(log);
 
-          //check to see if logcat debugging is enabled
-          if (_config.isDebuggable) {
-            print(Formatter.format(log, _config));
-          }
+        //check to see if logcat debugging is enabled
+        if (_config.isDebuggable) {
+          print(Formatter.format(log, _config));
         }
-      } else {
-        throw Exception(Constants.EXCEPTION_NULL_LOGS_LEVEL);
       }
     } else {
       throw Exception(Constants.EXCEPTION_NOT_INIT);
@@ -485,6 +495,6 @@ class FLog {
   /// This will check if user provided any configuration and logs are enabled
   /// if yes, then it will return true else it will return false
   static _isLogsConfigValid() {
-    return _config != null && _config.isLogsEnabled;
+    return _config.isLogsEnabled;
   }
 }
