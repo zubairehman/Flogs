@@ -4,6 +4,8 @@ import 'package:f_logs/f_logs.dart';
 import 'package:sembast/sembast.dart';
 import 'package:stack_trace/stack_trace.dart';
 
+typedef String StackTraceFormatter(StackTrace stackTrace);
+
 class FLog {
   // flogs data source
   static final _flogDao = FlogDao.instance;
@@ -36,11 +38,12 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
+    StackTraceFormatter? stackTraceFormatter,
   }) async {
     // prevent to write LogLevel.ALL and LogLevel.OFF to db
     if (![LogLevel.OFF, LogLevel.ALL].contains(type)) {
       _logThis(className, methodName, text, type, exception, dataLogType,
-          stacktrace);
+          stacktrace, stackTraceFormatter);
     }
   }
 
@@ -59,9 +62,10 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
+    StackTraceFormatter? stackTraceFormatter,
   }) async {
     _logThis(className, methodName, text, LogLevel.TRACE, exception,
-        dataLogType, stacktrace);
+        dataLogType, stacktrace, stackTraceFormatter);
   }
 
   /// debug
@@ -79,9 +83,10 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
+    StackTraceFormatter? stackTraceFormatter,
   }) async {
     _logThis(className, methodName, text, LogLevel.DEBUG, exception,
-        dataLogType, stacktrace);
+        dataLogType, stacktrace, stackTraceFormatter);
   }
 
   /// info
@@ -99,9 +104,10 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
+    StackTraceFormatter? stackTraceFormatter,
   }) async {
     _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType,
-        stacktrace);
+        stacktrace, stackTraceFormatter);
   }
 
   /// warning
@@ -119,9 +125,10 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
+    StackTraceFormatter? stackTraceFormatter,
   }) async {
     _logThis(className, methodName, text, LogLevel.WARNING, exception,
-        dataLogType, stacktrace);
+        dataLogType, stacktrace, stackTraceFormatter);
   }
 
   /// error
@@ -139,9 +146,10 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
+    StackTraceFormatter? stackTraceFormatter,
   }) async {
     _logThis(className, methodName, text, LogLevel.ERROR, exception,
-        dataLogType, stacktrace);
+        dataLogType, stacktrace, stackTraceFormatter);
   }
 
   /// severe
@@ -159,9 +167,10 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
+    StackTraceFormatter? stackTraceFormatter,
   }) async {
     _logThis(className, methodName, text, LogLevel.SEVERE, exception,
-        dataLogType, stacktrace);
+        dataLogType, stacktrace, stackTraceFormatter);
   }
 
   /// fatal
@@ -179,9 +188,10 @@ class FLog {
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
+    StackTraceFormatter? stackTraceFormatter,
   }) async {
     _logThis(className, methodName, text, LogLevel.FATAL, exception,
-        dataLogType, stacktrace);
+        dataLogType, stacktrace, stackTraceFormatter);
   }
 
   /// printLogs
@@ -386,7 +396,8 @@ class FLog {
       LogLevel type,
       dynamic exception,
       String? dataLogType,
-      StackTrace? stacktrace) {
+      StackTrace? stacktrace,
+      StackTraceFormatter? stackTraceFormatter) {
     assert(text != null);
     assert(type != null);
 
@@ -402,6 +413,15 @@ class FLog {
       methodName = Trace.current().frames[2].member!.split(".")[1];
     }
 
+    // Generate a custom formatted stack trace
+    String? formattedStackTrace;
+    if(stackTraceFormatter != null) {
+      if(stacktrace == null) {
+        stacktrace = StackTrace.current;
+      }
+      formattedStackTrace = stackTraceFormatter(stacktrace);
+    }
+
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
@@ -415,7 +435,7 @@ class FLog {
         exception: exception.toString(),
         timestamp: DateTimeUtils.getCurrentTimestamp(_config),
         timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
-        stacktrace: stacktrace.toString(),
+        stacktrace: formattedStackTrace ?? stacktrace.toString(),
       );
 
       //writing it to DB
