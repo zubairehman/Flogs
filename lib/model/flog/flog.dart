@@ -98,7 +98,7 @@ class FLog {
     required String text,
     dynamic exception,
     String? dataLogType,
-    StackTrace? stacktrace
+    StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType,
         stacktrace);
@@ -138,7 +138,8 @@ class FLog {
     required String text,
     dynamic exception,
     String? dataLogType,
-    StackTrace? stacktrace,}) async {
+    StackTrace? stacktrace,
+  }) async {
     _logThis(className, methodName, text, LogLevel.ERROR, exception,
         dataLogType, stacktrace);
   }
@@ -160,7 +161,7 @@ class FLog {
     StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.SEVERE, exception,
-        dataLogType, stacktrace,);
+        dataLogType, stacktrace);
   }
 
   /// fatal

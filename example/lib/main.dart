@@ -29,8 +29,7 @@ init() {
 //    ..stackTraceFormatter = CustomFormatter.formatStackTrace
 //    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_1;
 
-
-    /// Configuration example 2
+  /// Configuration example 2
 //  LogsConfig config = FLog.getDefaultConfigurations()
 //    ..isDevelopmentDebuggingEnabled = true
 //    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_2;
@@ -51,8 +50,6 @@ init() {
     ]
     ..customOpeningDivider = "{"
     ..customClosingDivider = "}";
-
-  // typedef String? StackTraceFormatter(StackTrace stackTrace);
 
   FLog.applyConfigurations(config);
 }
