@@ -390,6 +390,7 @@ class FLog {
     assert(text != null);
     assert(type != null);
 
+    // This variable can be ClassName.MethodName or only a function name, when it doesn't belong to a class, e.g. main()
     var member = Trace.current().frames[2].member!;
 
     //check to see if className is not provided
@@ -407,7 +408,6 @@ class FLog {
     //then its already been taken from calling class
     if (methodName == null) {
       // If there is a . in the member name, it means the method belongs to a class. Thus we can split it.
-      // If not, the member is the methodName, for example when used already in the main()
       if(member.contains(".")) {
         methodName = member.split(".")[1];
       } else {
