@@ -465,12 +465,11 @@ class FLog {
         if (LogLevel.values.indexOf(_config.activeLogLevel) <=
                 LogLevel.values.indexOf(log.logLevel!) &&
             _config.logLevelsEnabled.contains(_config.activeLogLevel)) {
-          await _flogDao.insert(log);
-
           //check to see if logcat debugging is enabled
           if (_config.isDebuggable) {
             print(Formatter.format(log, _config));
           }
+          await _flogDao.insert(log);
         }
       } else {
         throw Exception(Constants.EXCEPTION_NULL_LOGS_LEVEL);
