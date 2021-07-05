@@ -95,9 +95,9 @@ class FlogDao {
 
   /// fetch all Logs from Database
   Future<List<Log>> getAllLogs() async {
-    final recordSnapshots = await (_flogsStore.find(
+    final recordSnapshots = await _flogsStore.find(
       await _db,
-    ) as FutureOr<List<RecordSnapshot<int, Map<String, Object>>>>);
+    );
 
     // Making a List<Log> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {
