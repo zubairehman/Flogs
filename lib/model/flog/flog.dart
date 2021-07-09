@@ -390,16 +390,29 @@ class FLog {
     assert(text != null);
     assert(type != null);
 
+    // This variable can be ClassName.MethodName or only a function name, when it doesn't belong to a class, e.g. main()
+    var member = Trace.current().frames[2].member!;
+
     //check to see if className is not provided
     //then its already been taken from calling class
     if (className == null) {
-      className = Trace.current().frames[2].member!.split(".")[0];
+      // If there is a . in the member name, it means the method belongs to a class. Thus we can split it.
+      if(member.contains(".")) {
+        className = member.split(".")[0];
+      } else {
+        className = "";
+      }
     }
 
     //check to see if methodName is not provided
     //then its already been taken from calling class
     if (methodName == null) {
-      methodName = Trace.current().frames[2].member!.split(".")[1];
+      // If there is a . in the member name, it means the method belongs to a class. Thus we can split it.
+      if(member.contains(".")) {
+        methodName = member.split(".")[1];
+      } else {
+        methodName = member;
+      }
     }
 
     //check to see if user provides a valid configuration and logs are enabled
