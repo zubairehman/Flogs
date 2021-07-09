@@ -57,7 +57,7 @@ class LogsConfig {
   String csvDelimiter = "";
 
   /// Encryption enabled
-  bool encryptionEnabled = false;
+  String encryption = "";
 
   /// Encryption Key
   String encryptionKey = "";
