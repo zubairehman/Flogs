@@ -26,6 +26,7 @@ init() {
 //      DataLogType.NETWORK.toString(),
 //      "Zubair"
 //    ]
+//    ..stackTraceFormatter = CustomFormatter.formatStackTrace
 //    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_1;
 
   /// Configuration example 2
@@ -51,6 +52,14 @@ init() {
     ..customClosingDivider = "}";
 
   FLog.applyConfigurations(config);
+}
+
+class CustomFormatter {
+  static String formatStackTrace(StackTrace stackTrace) {
+    // You can handle the stackTrace here and return your own custom string as stack trace
+    // As an example, the default stack trace is returned
+    return stackTrace.toString();
+  }
 }
 
 class HomePage extends StatefulWidget {

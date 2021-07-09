@@ -1,5 +1,7 @@
 import 'package:f_logs/f_logs.dart';
 
+typedef String? StackTraceFormatter(StackTrace stackTrace);
+
 class LogsConfig {
   /// print logs in Logcat
   bool isDebuggable = true;
@@ -63,4 +65,7 @@ class LogsConfig {
   /// Timestamp format
   String timestampFormat =
       TimestampFormat.TIME_FORMAT_READABLE; //Timestamp format
+
+  // Configure a custom formatter for the StackTrace
+  StackTraceFormatter? stackTraceFormatter;
 }

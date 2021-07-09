@@ -415,6 +415,12 @@ class FLog {
       }
     }
 
+    // Generate a custom formatted stack trace
+    String? formattedStackTrace;
+    if(_config.stackTraceFormatter != null) {
+      formattedStackTrace = _config.stackTraceFormatter!(stacktrace ??  StackTrace.current);
+    }
+
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {
@@ -428,7 +434,7 @@ class FLog {
         exception: exception.toString(),
         timestamp: DateTimeUtils.getCurrentTimestamp(_config),
         timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
-        stacktrace: stacktrace.toString(),
+        stacktrace: formattedStackTrace ?? stacktrace.toString(),
       );
 
       //writing it to DB
