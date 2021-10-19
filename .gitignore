@@ -6,6 +6,18 @@
 .idea
 
 build/
+ios/.symlinks
 ios/.generated/
 ios/Flutter/Generated.xcconfig
 ios/Runner/GeneratedPluginRegistrant.*
+example/ios/Flutter/flutter_export_environment.sh
+example/pubspec.lock
+example/.flutter-plugins-dependencies
+pubspec.lock
+
+# FVM during tests
+.fvm
+.vscode/settings.json
+packages/cli/test/.test_coverage.dart
+packages/cli/.env
+.env

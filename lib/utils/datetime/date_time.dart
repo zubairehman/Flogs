@@ -1,6 +1,5 @@
 import 'package:f_logs/f_logs.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 
 class DateTimeUtils {
   DateTimeUtils._();
@@ -18,13 +17,13 @@ class DateTimeUtils {
 
   static String getTimeInMillis(LogsConfig config) {
     final now = DateTime.now();
-    var fiftyDaysFromNow = now.add(new Duration(days: -1));
+    var fiftyDaysFromNow = now.add(Duration(days: -1));
     return DateFormat(config.timestampFormat.toString())
         .format(fiftyDaysFromNow);
   }
 
-  static int getStartAndEndTimestamps({@required FilterType type}) {
-    int startTimeInMillis;
+  static int? getStartAndEndTimestamps({required FilterType type}) {
+    int? startTimeInMillis;
 
     //filter types
     const lastHour = "FilterType.LAST_HOUR";

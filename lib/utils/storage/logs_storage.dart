@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 class LogsStorage {
   static final LogsStorage _singleton = LogsStorage._();
 
-  // Singleton accessor
+  /// Singleton accessor
   static LogsStorage get instance => _singleton;
 
   // A private constructor. Allows us to create instances of LogsStorage
@@ -14,7 +14,7 @@ class LogsStorage {
   LogsStorage._();
 
   // Filing methods:------------------------------------------------------------
-  Future<String> get _localPath async {
+  Future<String?> get _localPath async {
     var directory;
 
     if (Platform.isIOS) {
@@ -27,7 +27,7 @@ class LogsStorage {
   }
 
   Future<File> get _localFile async {
-    final path = await _localPath + "/" + Constants.DIRECTORY_NAME;
+    final path = "${await _localPath}/${Constants.DIRECTORY_NAME}";
 
     //creating directory
     Directory(path).create()
@@ -50,12 +50,13 @@ class LogsStorage {
     return file;
   }
 
+  /// Read the Log-String from file
   Future<String> readLogsToFile() async {
     try {
       final file = await _localFile;
 
       // Read the file
-      String contents = await file.readAsString();
+      var contents = await file.readAsString();
 
       return contents;
     } catch (e) {
@@ -64,6 +65,7 @@ class LogsStorage {
     }
   }
 
+  /// Writes the `log`-String to file
   Future<File> writeLogsToFile(String log) async {
     final file = await _localFile;
 
