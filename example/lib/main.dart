@@ -230,6 +230,7 @@ class _HomePageState extends State<HomePage> {
     try {
       var string = "Zubair";
       var index = string[-1];
+      debugPrint(index.toString());
     } on Error catch (error) {
       FLog.error(
         text: "Error text/descritption goes here",
