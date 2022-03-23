@@ -1,79 +1,142 @@
-## [2.0.0-alpha-01] - Mar 31, 2021
+# Changelog
 
-* upgraded sembast
-* upgraded path provider
-* upgraded intl
-* upgraded to flutter 2.0
+All notable changes to this project will be documented in this file.
 
-## [1.3.0-alpha-02] - May 25, 2020
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-* changed exception to dynamic in-order to handle both exception & error
-* added support for file export
-* refactored code
+## [Unreleased]
 
-## [1.3.0-alpha-01] - Mar 23, 2020
+## [2.0.0-alpha-01] - 2021-03-31
 
-* refactored main.dart
-* changed exception to dynamic in-order to handle both exception & error
+### Changed
 
-## [1.2.2] - Oct 15, 2019
+- Upgraded sembast
+- Upgraded path provider
+- Upgraded intl
+- Upgraded to flutter 2.0
 
-* Upgraded all the dependencies
-* upgraded example to support AndroidX
+## [1.3.0-alpha-02] - 2020-05-25
 
-## [1.2.1] - Oct 15, 2019
+### Added
 
-* Import only one file instead of all the package files
-* Added fieldOrderFormatCustom for order fields in customized output
-* Added logging of stack traces
-* Added Log Level functionality, skipping lower Log Levels
-* Added deleteAllLogsByFilter
+- Support for file export
 
-## [1.2.0] - Jul 20, 2019
+### Changed
 
-* Fixed logs delete issue
-* Upgraded to v2.0
+- Exception to dynamic in-order to handle both exception & error
+- Refactored code
 
-## [1.1.2] - May 05, 2019
+## [1.3.0-alpha-01] - 2020-03-23
 
-* Updated readme.md file
-* Fixed LogLevel issue
+### Changed
 
-## [1.1.1] - May 05, 2019
+- Refactored main.dart
+- Exception to dynamic in-order to handle both exception & error
 
-* Bugfix in print logs function
+## [1.2.2] - 2019-10-15
 
-## [1.1.0] - May 05, 2019
+### Changed
 
-* Added convenience methods for log levels
-* Added default configuration
-* Changed className and methodName to optional
-* Updated readme.me
+- Upgraded all the dependencies
+- Upgraded example to support AndroidX
 
-## [1.0.1] - May 04, 2019
+## [1.2.1] - 2019-10-15
 
-* Removed unused code
+### Added
 
-## [1.0.0] - May 04, 2019
+- fieldOrderFormatCustom for order fields in customized output
+- logging of stack traces
+- Log Level functionality, skipping lower Log Levels
+- deleteAllLogsByFilter
 
-* Updated readme.md file
-* Added filter types
+### Changed
 
-## [0.1.5] - May 03, 2019
+- Import only one file instead of all the package files
 
-* Updated readme.md file
-* Added encryption support
+## [1.2.0] - 2019-06-20
 
-## [0.0.4] - May 03, 2019
+### Changed
 
-* Updated readme.md file
-* Added wiki
+- Upgraded to v2.0
 
-## [0.0.3] - May 02, 2019
+### Fixed
 
-* Updated readme.md file
-* Added wiki
+- Logs delete issue
 
-## [0.0.2] - May 02, 2019
+## [1.1.2] - 2019-05-05
 
-* Done code formatting
+### Changed
+
+- Updated README.md file
+
+### Fixed
+
+- LogLevel issue
+
+## [1.1.1] - 2019-05-05
+
+### Fixed
+
+- Bugfix in print logs function
+
+## [1.1.0] - 2019-05-05
+
+### Added
+
+- Convenience methods for log levels
+- Default configuration
+
+### Changed
+
+- className and methodName to optional
+- Updated README.md
+
+## [1.0.1] - 2019-05-04
+
+### Removed
+
+- Unused code
+
+## [1.0.0] - 2019-05-04
+
+### Added
+
+- Filter types
+
+### Changed
+
+- Updated README.md file
+
+## [0.1.5] - 2019-05-03
+
+### Added
+
+- Encryption support
+
+### Changed
+
+- Updated README.md file
+
+## [0.0.4] - 2019-05-03
+
+### Changed
+
+- Updated README.md file
+- Wiki
+
+## [0.0.3] - 2019-05-02
+
+### Added
+
+- Wiki
+
+### Changed
+
+- Updated README.md file
+
+## [0.0.2] - 2019-05-02
+
+### Changed
+
+- Code formatting (done)
