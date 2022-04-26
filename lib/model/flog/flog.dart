@@ -387,8 +387,6 @@ class FLog {
       dynamic exception,
       String? dataLogType,
       StackTrace? stacktrace) {
-    assert(text != null);
-    assert(type != null);
 
     // This variable can be ClassName.MethodName or only a function name, when it doesn't belong to a class, e.g. main()
     var member = Trace.current().frames[2].member!;
