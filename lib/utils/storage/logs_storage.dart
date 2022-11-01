@@ -17,7 +17,7 @@ class LogsStorage {
   Future<String?> get _localPath async {
     var directory;
 
-    if (Platform.isIOS) {
+    if (Platform.isIOS || Platform.isMacOS) {
       directory = await getApplicationDocumentsDirectory();
     } else {
       directory = await getExternalStorageDirectory();
