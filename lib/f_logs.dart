@@ -12,7 +12,7 @@ export 'package:f_logs/utils/encryption/xxtea.dart';
 export 'package:f_logs/utils/filters/filter_type.dart';
 export 'package:f_logs/utils/filters/filters.dart';
 export 'package:f_logs/utils/formatter/field_name.dart';
-export 'package:f_logs/utils/formatter/formate_type.dart';
 export 'package:f_logs/utils/formatter/formatter.dart';
+export 'package:f_logs/utils/formatter/formatter_type.dart';
 export 'package:f_logs/utils/storage/logs_storage.dart';
 export 'package:f_logs/utils/timestamp/timestamp_format.dart';
