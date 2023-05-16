@@ -16,7 +16,7 @@ dependencies:
 
   # This package provides internationalization and localization facilities, including message
   # translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
-  intl: ^0.17.0
+  intl: ^0.18.0
 
   # XXTEA is a fast and secure encryption algorithm. This is a XXTEA library for Dart.
   xxtea: ^2.1.0
