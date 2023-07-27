@@ -95,7 +95,7 @@ class FLog {
   static void info({
     String? className,
     String? methodName,
-    required String text,
+    required dynamic text,
     dynamic exception,
     String? dataLogType,
     StackTrace? stacktrace,
@@ -382,12 +382,11 @@ class FLog {
   static void _logThis(
       String? className,
       String? methodName,
-      String text,
+      dynamic text,
       LogLevel type,
       dynamic exception,
       String? dataLogType,
       StackTrace? stacktrace) {
-
     // This variable can be ClassName.MethodName or only a function name, when it doesn't belong to a class, e.g. main()
     var member = Trace.current().frames[2].member!;
 
@@ -395,7 +394,7 @@ class FLog {
     //then its already been taken from calling class
     if (className == null) {
       // If there is a . in the member name, it means the method belongs to a class. Thus we can split it.
-      if(member.contains(".")) {
+      if (member.contains(".")) {
         className = member.split(".")[0];
       } else {
         className = "";
@@ -406,7 +405,7 @@ class FLog {
     //then its already been taken from calling class
     if (methodName == null) {
       // If there is a . in the member name, it means the method belongs to a class. Thus we can split it.
-      if(member.contains(".")) {
+      if (member.contains(".")) {
         methodName = member.split(".")[1];
       } else {
         methodName = member;
@@ -415,8 +414,9 @@ class FLog {
 
     // Generate a custom formatted stack trace
     String? formattedStackTrace;
-    if(_config.stackTraceFormatter != null) {
-      formattedStackTrace = _config.stackTraceFormatter!(stacktrace ??  StackTrace.current);
+    if (_config.stackTraceFormatter != null) {
+      formattedStackTrace =
+          _config.stackTraceFormatter!(stacktrace ?? StackTrace.current);
     }
 
     //check to see if user provides a valid configuration and logs are enabled
@@ -458,7 +458,8 @@ class FLog {
   /// _getAllSortedByFilter
   ///
   /// This will return the list of logs sorted by provided filters
-  static Future<List<Log>> _getAllSortedByFilter({List<Filter>? filters}) async {
+  static Future<List<Log>> _getAllSortedByFilter(
+      {List<Filter>? filters}) async {
     //check to see if user provides a valid configuration and logs are enabled
     //if not then don't do anything
     if (_isLogsConfigValid()) {

@@ -7,7 +7,7 @@ class Log {
 
   String? className;
   String? methodName;
-  String? text;
+  dynamic text;
   String? timestamp;
   String? exception;
   String? dataLogType;
